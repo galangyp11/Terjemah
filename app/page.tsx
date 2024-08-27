@@ -19,7 +19,7 @@ export default function Home() {
         <Input />
       </div>
 
-      <div id="masuk" className="bg-krem1 flex justify-center">
+      <div id="koleksi" className="bg-krem1 flex justify-center">
         <Koleksi />
       </div>
 

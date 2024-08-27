@@ -12,7 +12,7 @@ export default function koleksi() {
       </div>
 
       <div className="w-full flex justify-center">
-        <div className="w-[1000px] h-[500px] bg-white rounded-lg"></div>
+        <div className="lg:w-[1000px] w-full lg:px-0 px-6 h-[500px] bg-white rounded-lg"></div>
       </div>
     </div>
   );
