@@ -5,13 +5,25 @@ const config: Config = {
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/**/*.{html,js}",
   ],
   theme: {
     extend: {
+      fontFamily: {
+        inter: ["Inter", "sans-serif"],
+        alata: ["Alata", "sans-serif"],
+        noto: ["Noto Sans JP", "sans-serif"],
+        mont: ["Montserrat Alternates", "sans-serif"],
+      },
+      colors: {
+        biru: "#030537",
+        coklat: "#674636",
+        krem1: "#FFF8E8",
+        krem2: "#F7EED3",
+        hijau: "#AAB396",
+      },
       backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        bg_home: "url('/app/image/bg-home.svg')",
       },
     },
   },
