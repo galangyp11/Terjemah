@@ -1,6 +1,35 @@
-import React from "react";
+"use client";
 
-export default function input() {
+import React from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { json } from "stream/consumers";
+
+export default function Input() {
+  const [inputKata, setInputKata] = useState({
+    indonesia: "",
+    sunda: "",
+  });
+
+  const handleInput = (e: any) => {
+    e.preventDefault();
+    setInputKata((data) => ({ ...data, [e.target.id]: e.target.value }));
+  };
+
+  const handleSimpan = async (e: any) => {
+    e.preventDefault();
+
+    if (inputKata.indonesia === "") {
+      alert("Kata tidak boleh kosong");
+    } else if (inputKata.sunda === "") {
+      alert("Kata tidak boleh kosong");
+    } else {
+      await axios.post(`http://localhost:3011/kata`, inputKata);
+    }
+
+    console.log(inputKata);
+  };
+
   return (
     <div className="w-full h-[600px] py-12 lg:container">
       <div className="flex justify-center items-center">
@@ -17,7 +46,10 @@ export default function input() {
           <div className="flex justify-center items-center">
             <input
               type="text"
-              className="lg:w-2/3 w-full lg:h-24 h-12 rounded-xl focus:text-black focus:font-alata focus:font-medium px-6"
+              id="indonesia"
+              className="lg:w-2/3 w-full lg:h-24 h-12 rounded-xl text-black font-alata font-medium px-6"
+              // value={inputKata.indonesia}
+              onChange={handleInput}
             />
           </div>
         </div>
@@ -29,7 +61,10 @@ export default function input() {
           <div className="flex justify-center items-center">
             <input
               type="text"
-              className="lg:w-2/3 w-full lg:h-24 h-12 rounded-xl focus:text-black focus:font-alata focus:font-medium px-6"
+              id="sunda"
+              className="lg:w-2/3 w-full lg:h-24 h-12 rounded-xl text-black font-alata font-medium px-6"
+              // value={inputKata.sunda}
+              onChange={handleInput}
             />
           </div>
         </div>
@@ -46,20 +81,23 @@ export default function input() {
           </div>
 
           <div className="col-span-1">
-            <div className="w-[200px] h-[50px] bg-[#99BC85] rounded-full flex justify-center items-center cursor-pointer hover:outline hover:outline-4 hover:outline-offset-2 hover:outline-coklat">
+            <button
+              className="w-[200px] h-[50px] bg-[#99BC85] rounded-full flex justify-center items-center cursor-pointer hover:outline hover:outline-4 hover:outline-offset-2 hover:outline-coklat"
+              onClick={handleSimpan}
+            >
               <p className="text-krem1 font-alata font-medium text-2xl">
                 Simpan
               </p>
-            </div>
+            </button>
           </div>
         </div>
       </div>
 
       <div className="w-full flex flex-col items-center justify-center lg:hidden gap-6">
         <div className="col-span-1">
-          <div className="w-[200px] h-[50px] bg-[#99BC85] rounded-full flex justify-center items-center cursor-pointer hover:outline hover:outline-4 hover:outline-offset-2 hover:outline-coklat">
+          <button className="w-[200px] h-[50px] bg-[#99BC85] rounded-full flex justify-center items-center cursor-pointer hover:outline hover:outline-4 hover:outline-offset-2 hover:outline-coklat">
             <p className="text-krem1 font-alata font-medium text-2xl">Simpan</p>
-          </div>
+          </button>
         </div>
 
         <div className="col-span-1">
