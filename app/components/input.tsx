@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { json } from "stream/consumers";
@@ -30,6 +30,10 @@ export default function Input() {
     console.log(inputKata);
   };
 
+  useEffect(() => {
+    setInputKata((data) => ({ ...data, indonesia: "", sunda: "" }));
+  }, []);
+
   return (
     <div className="w-full h-[600px] py-12 lg:container">
       <div className="flex justify-center items-center">
@@ -47,8 +51,8 @@ export default function Input() {
             <input
               type="text"
               id="indonesia"
-              className="lg:w-2/3 w-full lg:h-24 h-12 rounded-xl text-black font-alata font-medium px-6"
-              // value={inputKata.indonesia}
+              className="lg:w-2/3 w-full lg:h-24 h-12 rounded-xl text-black text-2xl font-alata font-medium px-6 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]"
+              value={inputKata.indonesia}
               onChange={handleInput}
             />
           </div>
@@ -62,8 +66,8 @@ export default function Input() {
             <input
               type="text"
               id="sunda"
-              className="lg:w-2/3 w-full lg:h-24 h-12 rounded-xl text-black font-alata font-medium px-6"
-              // value={inputKata.sunda}
+              className="lg:w-2/3 w-full lg:h-24 h-12 rounded-xl text-black text-2xl font-alata font-medium px-6 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]"
+              value={inputKata.sunda}
               onChange={handleInput}
             />
           </div>

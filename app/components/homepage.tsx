@@ -25,7 +25,7 @@ export default function homepage() {
 
         <div className="col-span-1 flex justify-center items-center lg:my-0 my-6">
           <div className="flex flex-col gap-6">
-            <Link href="#masuk">
+            <Link href="/masuk">
               <div className="w-[300px] h-[90px] bg-[#F6995C] rounded-full flex justify-center items-center cursor-pointer hover:outline hover:outline-4 hover:outline-offset-2 hover:outline-coklat">
                 <p className="text-krem1 font-alata font-medium text-2xl">
                   Masukkan Kata
@@ -33,7 +33,7 @@ export default function homepage() {
               </div>
             </Link>
 
-            <Link href="#koleksi">
+            <Link href="/koleksi">
               <div className="w-[300px] h-[90px] bg-[#F6995C] rounded-full flex justify-center items-center cursor-pointer hover:outline hover:outline-4 hover:outline-offset-2 hover:outline-coklat">
                 <p className="text-krem1 font-alata font-medium text-2xl">
                   Koleksi Kata

@@ -1,8 +1,6 @@
-import Navbar from "./components/navbar";
-import Homepage from "@/app/components/homepage";
+import Navbar from "@/app/components/navbar";
 import Input from "@/app/components/input";
-import Koleksi from "./components/koleksi";
-import Footer from "./components/footer";
+import Footer from "@/app/components/footer";
 
 export default function Home() {
   return (
@@ -12,7 +10,7 @@ export default function Home() {
       </div>
 
       <div className="mt-10 w-full flex justify-center">
-        <Homepage />
+        <Input />
       </div>
 
       <div>
