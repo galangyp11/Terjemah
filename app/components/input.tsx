@@ -13,7 +13,11 @@ export default function Input() {
 
   const handleInput = (e: any) => {
     e.preventDefault();
-    setInputKata((data) => ({ ...data, [e.target.id]: e.target.value }));
+
+    setInputKata((data) => ({
+      ...data,
+      [e.target.id]: e.target.value,
+    }));
   };
 
   const handleSimpan = async (e: any) => {
@@ -54,6 +58,7 @@ export default function Input() {
               className="lg:w-2/3 w-full lg:h-24 h-12 rounded-xl text-black text-2xl font-alata font-medium px-6 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]"
               value={inputKata.indonesia}
               onChange={handleInput}
+              autoComplete="off"
             />
           </div>
         </div>
@@ -69,6 +74,7 @@ export default function Input() {
               className="lg:w-2/3 w-full lg:h-24 h-12 rounded-xl text-black text-2xl font-alata font-medium px-6 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]"
               value={inputKata.sunda}
               onChange={handleInput}
+              autoComplete="off"
             />
           </div>
         </div>

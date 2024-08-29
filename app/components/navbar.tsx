@@ -25,7 +25,7 @@ export default function Navbar() {
         }
       >
         <Image src={Logo} alt="" className="h-12 w-auto" />
-        <p className="text-biru font-inter font-semibold text-xl">
+        <p className="text-biru font-inter font-semibold lg:text-xl text-md">
           SD Berkarakter Al-Biruni
         </p>
       </div>
