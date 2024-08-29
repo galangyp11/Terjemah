@@ -3,6 +3,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { SyncLoader } from "react-spinners";
+import { FaRegSadCry } from "react-icons/fa";
 
 export default function Koleksi() {
   const [dataKata, setDataKata] = useState<any[]>([]);
@@ -107,12 +108,21 @@ export default function Koleksi() {
           ) : (
             <div className="w-full h-full">
               {dataCariKata?.length !== 1 ? (
-                <div className="w-full h-full flex justify-center items-center gap-4">
-                  <p className="text-coklat text-xl font-alata font-medium">
-                    Mencari kata
-                  </p>
-                  <SyncLoader size={10} color="#674636" />
-                </div>
+                isLoading ? (
+                  <div className="w-full h-full flex justify-center items-center gap-4">
+                    <p className="text-coklat text-xl font-alata font-medium">
+                      Mencari kata
+                    </p>
+                    <SyncLoader size={10} color="#674636" />
+                  </div>
+                ) : (
+                  <div className="w-full h-full flex justify-center items-center gap-4">
+                    <p className="text-coklat text-xl font-alata font-medium">
+                      Kata yang kamu cari tidak ada
+                    </p>
+                    <FaRegSadCry size={30} color="#674636" />
+                  </div>
+                )
               ) : (
                 <div className="w-full h-full flex justify-center items-center">
                   <div className="grid grid-cols-2 text-coklat text-lg">

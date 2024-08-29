@@ -13,10 +13,11 @@ export default function Input() {
 
   const handleInput = (e: any) => {
     e.preventDefault();
-
+    const kapital =
+      e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1);
     setInputKata((data) => ({
       ...data,
-      [e.target.id]: e.target.value,
+      [e.target.id]: kapital,
     }));
   };
 
@@ -30,13 +31,13 @@ export default function Input() {
     } else {
       await axios.post(`http://localhost:3011/kata`, inputKata);
     }
-
+    setInputKata((data) => ({ ...data, indonesia: "", sunda: "" }));
     console.log(inputKata);
   };
 
-  useEffect(() => {
-    setInputKata((data) => ({ ...data, indonesia: "", sunda: "" }));
-  }, []);
+  // useEffect(() => {
+  //   setInputKata((data) => ({ ...data, indonesia: "", sunda: "" }));
+  // }, []);
 
   return (
     <div className="w-full h-[600px] py-12 lg:container">
