@@ -4,6 +4,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { SyncLoader } from "react-spinners";
 import { FaRegSadCry } from "react-icons/fa";
+import { routes } from "../api/routes";
 
 export default function Koleksi() {
   const [dataKata, setDataKata] = useState<any[]>([]);
@@ -13,7 +14,7 @@ export default function Koleksi() {
 
   useEffect(() => {
     const getKata = async () => {
-      const response = await axios.get(`http://localhost:3011/kata`);
+      const response = await axios.get(`${routes}/kata`);
       // console.log(response);
       setDataKata(response.data);
     };
@@ -30,9 +31,7 @@ export default function Koleksi() {
 
   useEffect(() => {
     const onSearchItem = async () => {
-      const response = await axios.get(
-        `http://localhost:3011/kata/${cariKata}`
-      );
+      const response = await axios.get(`${routes}/kata/${cariKata}`);
       setDataCariKata(response.data);
     };
     onSearchItem();

@@ -4,6 +4,7 @@ import React, { useRef } from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { json } from "stream/consumers";
+import { routes } from "../api/routes";
 
 export default function Input() {
   const [inputKata, setInputKata] = useState({
@@ -29,7 +30,7 @@ export default function Input() {
     } else if (inputKata.sunda === "") {
       alert("Kata tidak boleh kosong");
     } else {
-      await axios.post(`http://localhost:3011/kata`, inputKata);
+      await axios.post(`${routes}/kata`, inputKata);
     }
     setInputKata((data) => ({ ...data, indonesia: "", sunda: "" }));
     console.log(inputKata);
