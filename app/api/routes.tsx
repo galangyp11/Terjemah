@@ -1,1 +1,1 @@
-export const routes = "https://terjemah-api.vercel.app/";
+export const routes = "https://terjemah-api.vercel.app";
