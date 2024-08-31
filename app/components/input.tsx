@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { json } from "stream/consumers";
 import { routes } from "../api/routes";
+import { motion } from "framer-motion";
 
 export default function Input() {
   const [inputKata, setInputKata] = useState({
@@ -36,9 +37,10 @@ export default function Input() {
     console.log(inputKata);
   };
 
-  // useEffect(() => {
-  //   setInputKata((data) => ({ ...data, indonesia: "", sunda: "" }));
-  // }, []);
+  const handleHapusCariKata = (e: any) => {
+    e.preventDefault();
+    setInputKata((data) => ({ ...data, indonesia: "", sunda: "" }));
+  };
 
   return (
     <div className="w-full h-[600px] py-12 lg:container">
@@ -85,37 +87,61 @@ export default function Input() {
       <div className="w-full lg:flex justify-center hidden">
         <div className="grid grid-cols-2 gap-6">
           <div className="col-span-1">
-            <div className="w-[200px] h-[50px] bg-[#DF6A6A] rounded-full flex justify-center items-center cursor-pointer hover:outline hover:outline-4 hover:outline-offset-2 hover:outline-coklat">
-              <p className="text-krem1 font-alata font-medium text-2xl">
-                Batal
-              </p>
+            <div className="absolute -mt-1 -ml-1 active:mt-0 active:ml-0">
+              <div
+                className="w-[200px] h-[50px] bg-[#DF6A6A] rounded-full flex justify-center items-center cursor-pointer "
+                onClick={handleHapusCariKata}
+              >
+                <p className="text-krem1 font-alata font-medium text-2xl">
+                  Batal
+                </p>
+              </div>
             </div>
+            <div className="w-[200px] h-[50px] rounded-full bg-coklat"></div>
           </div>
 
           <div className="col-span-1">
-            <button
-              className="w-[200px] h-[50px] bg-[#99BC85] rounded-full flex justify-center items-center cursor-pointer hover:outline hover:outline-4 hover:outline-offset-2 hover:outline-coklat"
-              onClick={handleSimpan}
-            >
-              <p className="text-krem1 font-alata font-medium text-2xl">
-                Simpan
-              </p>
-            </button>
+            <div className="col-span-1">
+              <div className="absolute -mt-1 -ml-1 active:mt-0 active:ml-0">
+                <div
+                  className="w-[200px] h-[50px] bg-[#99BC85] rounded-full flex justify-center items-center cursor-pointer "
+                  onClick={handleSimpan}
+                >
+                  <p className="text-krem1 font-alata font-medium text-2xl">
+                    Simpan
+                  </p>
+                </div>
+              </div>
+              <div className="w-[200px] h-[50px] rounded-full bg-coklat"></div>
+            </div>
           </div>
         </div>
       </div>
 
       <div className="w-full flex flex-col items-center justify-center lg:hidden gap-6">
         <div className="col-span-1">
-          <button className="w-[200px] h-[50px] bg-[#99BC85] rounded-full flex justify-center items-center cursor-pointer hover:outline hover:outline-4 hover:outline-offset-2 hover:outline-coklat">
-            <p className="text-krem1 font-alata font-medium text-2xl">Simpan</p>
-          </button>
+          <div className="absolute -mt-1 -ml-1 active:mt-0 active:ml-0">
+            <div
+              className="w-[200px] h-[50px] bg-[#99BC85] rounded-full flex justify-center items-center cursor-pointer "
+              onClick={handleSimpan}
+            >
+              <p className="text-krem1 font-alata font-medium text-2xl">
+                Simpan
+              </p>
+            </div>
+          </div>
+          <div className="w-[200px] h-[50px] rounded-full bg-coklat"></div>
         </div>
 
         <div className="col-span-1">
-          <div className="w-[200px] h-[50px] bg-[#DF6A6A] rounded-full flex justify-center items-center cursor-pointer hover:outline hover:outline-4 hover:outline-offset-2 hover:outline-coklat">
-            <p className="text-krem1 font-alata font-medium text-2xl">Batal</p>
+          <div className="absolute -mt-1 -ml-1 active:mt-0 active:ml-0">
+            <div className="w-[200px] h-[50px] bg-[#DF6A6A] rounded-full flex justify-center items-center cursor-pointer ">
+              <p className="text-krem1 font-alata font-medium text-2xl">
+                Batal
+              </p>
+            </div>
           </div>
+          <div className="w-[200px] h-[50px] rounded-full bg-coklat"></div>
         </div>
       </div>
     </div>
