@@ -1,25 +1,45 @@
 "use client";
 
-import React, { useState, Dispatch, SetStateAction } from "react";
+import React, { useState, Dispatch, SetStateAction, useEffect } from "react";
 import { IoCaretBack } from "react-icons/io5";
+import axios from "axios";
+import { routes } from "../api/routes";
 
 interface Props {
-  kodeAkses: string;
-  setKodeAkses: Dispatch<SetStateAction<string>>;
   setIsMenu: Dispatch<SetStateAction<boolean>>;
 }
 //gausah di passing langsung post aja ke db nanti tinggal dipanggil
-export default function Kodeakses({
-  kodeAkses,
-  setKodeAkses,
-  setIsMenu,
-}: Props) {
-  //   const [kodeAkses, setKodeAkses] = useState<string>("");
+export default function Kodeakses({ setIsMenu }: Props) {
+  const [kodeAkses, setKodeAkses] = useState({
+    kode: "",
+  });
+
+  const [dataKode, setDataKode] = useState<any[]>([]);
   const [isUbah, setIsUbah] = useState(false);
+
+  useEffect(() => {
+    const getKode = async () => {
+      const response = await axios.get(`${routes}/kode`);
+      setDataKode(response?.data);
+    };
+    getKode();
+  }, [isUbah, kodeAkses]);
 
   const handleInputKode = (e: any) => {
     e.preventDefault();
-    setKodeAkses(e.target.value);
+    setKodeAkses((data) => ({ ...data, kode: e.target.value }));
+  };
+
+  const handleSimpan = async (e: any) => {
+    e.preventDefault();
+
+    if (kodeAkses.kode === "") {
+      alert("Masukan minimal 1 angka");
+    } else {
+      await axios.put(`${routes}/kode/66d5de52b804b267b226c202`, kodeAkses);
+
+      setIsUbah(false);
+    }
   };
   return (
     <div className="w-full">
@@ -47,12 +67,14 @@ export default function Kodeakses({
         </div>
         <div className="col-span-2 flex items-center justify-center">
           {!isUbah ? (
-            <p className="text-black text-xl font-bold">{kodeAkses}</p>
+            <p className="text-black text-xl font-bold">{dataKode[0]?.kode}</p>
           ) : (
             <input
-              type="number"
-              className="bg-gray-200 rounded-lg px-2 h-12 w-24 text-black text-xl font-bold"
-              value={kodeAkses}
+              type="tel"
+              placeholder="****"
+              className="bg-gray-200 text-center rounded-lg px-2 h-12 w-24 text-black text-xl font-bold"
+              maxLength={4}
+              value={kodeAkses.kode}
               onChange={handleInputKode}
             />
           )}
@@ -67,18 +89,10 @@ export default function Kodeakses({
             </div>
           ) : (
             <div
-              className="h-10 w-20 bg-blue-400 cursor-pointer hover:brightness-95 flex justify-center items-center rounded-lg shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]"
-              onClick={() => {
-                if (kodeAkses.length === 0) {
-                  alert("Masukan minimal 1 angka");
-                } else if (kodeAkses.length > 4) {
-                  alert("Maksimal 4 angka");
-                } else {
-                  setIsUbah(false);
-                }
-              }}
+              className="h-10 w-20 bg-sky-600 cursor-pointer hover:brightness-95 flex justify-center items-center rounded-lg shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]"
+              onClick={handleSimpan}
             >
-              <p className="text-black font-semibold text-lg">Simpan</p>
+              <p className="text-white font-semibold text-lg">Simpan</p>
             </div>
           )}
         </div>

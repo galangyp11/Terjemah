@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Logo from "@/app/image/logo-sd-berkarakter-al-biruni.png";
 import { PiKey } from "react-icons/pi";
@@ -9,24 +9,28 @@ import { IoMdPerson } from "react-icons/io";
 import { IoPersonCircleSharp } from "react-icons/io5";
 import Kodeakses from "@/app/components/kodeakses";
 import Link from "next/link";
+import axios from "axios";
+import { routes } from "@/app/api/routes";
 
 export default function Page() {
   const [menu, setMenu] = useState<any>();
-  const [kodeAkses, setKodeAkses] = useState<string>("");
+  const [dataKode, setDataKode] = useState<any[]>([]);
   const [isMenu, setIsMenu] = useState<boolean>(false);
 
   const handlePilihMenuKode = (e: any) => {
     e.preventDefault();
 
     setIsMenu(true);
-    setMenu(
-      <Kodeakses
-        setIsMenu={setIsMenu}
-        kodeAkses={kodeAkses}
-        setKodeAkses={setKodeAkses}
-      />
-    );
+    setMenu(<Kodeakses setIsMenu={setIsMenu} />);
   };
+
+  useEffect(() => {
+    const getKode = async () => {
+      const response = await axios.get(`${routes}/kode`);
+      setDataKode(response?.data);
+    };
+    getKode();
+  }, [isMenu, menu]);
 
   return (
     <div className="h-screen w-full grid grid-cols-5">
@@ -90,7 +94,9 @@ export default function Page() {
                     </p>
                   </div>
                   <div className="w-full h-1/2 flex items-start">
-                    <p className="font-inter text-xl text-black">{kodeAkses}</p>
+                    <p className="font-inter text-xl text-black">
+                      {dataKode[0]?.kode}
+                    </p>
                   </div>
                 </div>
                 <div className="col-span-1 flex items-center">
