@@ -12,6 +12,7 @@ export default function Input() {
     indonesia: "",
     sunda: "",
   });
+  const [dataCariKata, setDataCariKata] = useState<any[]>([]);
 
   const handleInput = (e: any) => {
     e.preventDefault();
@@ -30,6 +31,8 @@ export default function Input() {
       alert("Kata tidak boleh kosong");
     } else if (inputKata.sunda === "") {
       alert("Kata tidak boleh kosong");
+    } else if (dataCariKata.length >= 1) {
+      alert("Kata sudah ada di koleksi");
     } else {
       await axios.post(`${routes}/kata`, inputKata);
     }
@@ -41,6 +44,22 @@ export default function Input() {
     e.preventDefault();
     setInputKata((data) => ({ ...data, indonesia: "", sunda: "" }));
   };
+
+  useEffect(() => {
+    const onSearchItem = async () => {
+      try {
+        const response = await axios.get(
+          `${routes}/cekkata/${inputKata.indonesia}`
+        );
+        setDataCariKata(response.data);
+      } catch (error) {
+        console.log("data cek kosong");
+      }
+    };
+    onSearchItem();
+  }, [inputKata]);
+
+  console.log("cariKata", dataCariKata);
 
   return (
     <div className="w-full h-[600px] py-12 lg:container">

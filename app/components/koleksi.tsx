@@ -20,7 +20,7 @@ export default function Koleksi() {
     const getKata = async () => {
       const response = await axios.get(`${routes}/kata`);
 
-      if (isSortIndonesia === false) {
+      if (isSortIndonesia === true) {
         const sortIndo = response.data.sort((a: any, b: any) => {
           if (a.indonesia > b.indonesia) {
             return 1;
@@ -68,10 +68,6 @@ export default function Koleksi() {
     };
     getKata();
   }, [isSortIndonesia]);
-
-  // useEffect(() => {
-  //   console.log("result", result);
-  // }, [dataKata, isSortIndonesia]);
 
   const handleSort = (e: any) => {
     e.preventDefault();
@@ -121,11 +117,11 @@ export default function Koleksi() {
       </div>
 
       <div className="w-full flex justify-center mb-8">
-        <div className="lg:w-[400px] w-[300px] h-10 px-2 rounded-lg flex bg-white text-black text-lg font-alata font-medium shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
+        <div className="lg:w-[400px] w-[300px] h-10 px-2 rounded-lg flex bg-krem1 text-coklat text-lg font-alata font-medium shadow-[0px_-1px_0px_2px_#674636]">
           <input
             type="text"
             placeholder="Cari Kata...."
-            className="w-full h-full focus:outline-none ml-2"
+            className="w-full h-full bg-krem1 focus:outline-none ml-2"
             value={cariKata}
             onChange={handleCariKata}
           />
@@ -143,16 +139,16 @@ export default function Koleksi() {
       </div>
 
       <div className="w-full flex justify-center ">
-        <div className="lg:w-[1000px] w-[400px] h-[480px] bg-white rounded-lg shadow-[0px_4px_0px_5px_#674636]">
+        <div className="lg:w-[1000px] w-[400px] h-[480px] bg-krem1 rounded-lg shadow-[0px_4px_0px_5px_#674636]">
           <div className="w-full h-12 grid grid-cols-7 rounded-lg bg-krem2">
             <div className="col-span-3 flex justify-center items-center rounded-lg">
               {isSortIndonesia ? (
                 <p className="text-coklat font-alata text-2xl font-medium">
-                  SUNDA
+                  INDONESIA
                 </p>
               ) : (
                 <p className="text-coklat font-alata text-2xl font-medium">
-                  INDONESIA
+                  SUNDA
                 </p>
               )}
             </div>
@@ -172,11 +168,11 @@ export default function Koleksi() {
             <div className="col-span-3 flex justify-center items-center rounded-lg">
               {isSortIndonesia ? (
                 <p className="text-coklat font-alata text-2xl font-medium">
-                  INDONESIA
+                  SUNDA
                 </p>
               ) : (
                 <p className="text-coklat font-alata text-2xl font-medium">
-                  SUNDA
+                  INDONESIA
                 </p>
               )}
             </div>
@@ -191,26 +187,26 @@ export default function Koleksi() {
                 <SyncLoader size={10} color="#674636" />
               </div>
             ) : (
-              <div className="w-full h-[432px]">
+              <div className="w-full h-[432px] ">
                 {cariKata === "" && isLoading === false ? (
-                  <div className=" bg-krem1 max-h-full overflow-y-auto rounded-lg">
-                    {!isSortIndonesia
+                  <div className=" bg-krem1 max-h-full overflow-y-auto rounded-lg scrollbar-thin scrollbar-thumb-coklat scrollbar-track-krem2">
+                    {isSortIndonesia
                       ? dataKataGroup?.map((data) => {
-                          return <Groupkata data={data} key={data?.index} />;
+                          return (
+                            <Groupkata
+                              data={data}
+                              isSortIndonesia={isSortIndonesia}
+                              key={data?.index}
+                            />
+                          );
                         })
                       : dataKataGroup?.map((data) => {
                           return (
-                            <div
-                              key={data?._id}
-                              className="grid grid-cols-2 text-coklat text-lg"
-                            >
-                              <div>
-                                <p>{data?.sunda}</p>
-                              </div>
-                              <div>
-                                <p>{data?.indonesia}</p>
-                              </div>
-                            </div>
+                            <Groupkata
+                              data={data}
+                              isSortIndonesia={isSortIndonesia}
+                              key={data?.index}
+                            />
                           );
                         })}
                   </div>

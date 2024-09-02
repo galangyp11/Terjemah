@@ -1,13 +1,33 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Image from "next/image";
 import Logo from "@/app/image/logo-sd-berkarakter-al-biruni.png";
 import { PiKey } from "react-icons/pi";
 import { TiSortAlphabetically } from "react-icons/ti";
 import { IoMdPerson } from "react-icons/io";
 import { IoPersonCircleSharp } from "react-icons/io5";
+import Kodeakses from "@/app/components/kodeakses";
 import Link from "next/link";
 
-export default function page() {
+export default function Page() {
+  const [menu, setMenu] = useState<any>();
+  const [kodeAkses, setKodeAkses] = useState<string>("");
+  const [isMenu, setIsMenu] = useState<boolean>(false);
+
+  const handlePilihMenuKode = (e: any) => {
+    e.preventDefault();
+
+    setIsMenu(true);
+    setMenu(
+      <Kodeakses
+        setIsMenu={setIsMenu}
+        kodeAkses={kodeAkses}
+        setKodeAkses={setKodeAkses}
+      />
+    );
+  };
+
   return (
     <div className="h-screen w-full grid grid-cols-5">
       <div className="col-span-1 bg-white h-full p-6">
@@ -53,50 +73,58 @@ export default function page() {
             </Link>
           </div>
         </div>
-        <div className="w-full p-6">
-          <div className="grid grid-cols-3 gap-4">
-            <div className="w-full h-[200px] px-12 cursor-pointer hover:brightness-95 grid grid-cols-3 rounded-lg bg-white shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
-              <div className="col-span-2">
-                <div className="w-full h-1/2 flex items-end">
-                  <p className="font-inter font-semibold text-2xl text-black">
-                    Kode Akses
-                  </p>
-                </div>
-                <div className="w-full h-1/2 flex items-start">
-                  <p className="font-inter text-xl text-black">4992</p>
-                </div>
-              </div>
-              <div className="col-span-1 flex items-center">
-                <PiKey className="text-[#e5e7eb]" size={100} />
-              </div>
-            </div>
 
-            <div className="w-full h-[200px] px-12 cursor-pointer hover:brightness-95 grid grid-cols-3 rounded-lg bg-white shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
-              <div className="col-span-2">
-                <div className="w-full h-1/2 flex items-end">
-                  <p className="font-inter font-semibold text-2xl text-black">
-                    Kelola Kata
-                  </p>
+        <div className="w-full p-6 ">
+          {isMenu ? (
+            menu
+          ) : (
+            <div className="grid grid-cols-3 gap-4">
+              <div
+                className="w-full h-[200px] px-12 cursor-pointer hover:brightness-95 grid grid-cols-3 rounded-lg bg-white shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]"
+                onClick={handlePilihMenuKode}
+              >
+                <div className="col-span-2">
+                  <div className="w-full h-1/2 flex items-end">
+                    <p className="font-inter font-semibold text-2xl text-black">
+                      Kode Akses
+                    </p>
+                  </div>
+                  <div className="w-full h-1/2 flex items-start">
+                    <p className="font-inter text-xl text-black">{kodeAkses}</p>
+                  </div>
+                </div>
+                <div className="col-span-1 flex items-center">
+                  <PiKey className="text-[#e5e7eb]" size={100} />
                 </div>
               </div>
-              <div className="col-span-1 flex items-center">
-                <TiSortAlphabetically className="text-[#e5e7eb]" size={100} />
-              </div>
-            </div>
 
-            <div className="w-full h-[200px] px-12 cursor-pointer hover:brightness-95 grid grid-cols-3 rounded-lg bg-white shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
-              <div className="col-span-2">
-                <div className="w-full h-1/2 flex items-end">
-                  <p className="font-inter font-semibold text-2xl text-black">
-                    Kelola Admin
-                  </p>
+              <div className="w-full h-[200px] px-12 cursor-pointer hover:brightness-95 grid grid-cols-3 rounded-lg bg-white shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
+                <div className="col-span-2">
+                  <div className="w-full h-1/2 flex items-end">
+                    <p className="font-inter font-semibold text-2xl text-black">
+                      Kelola Kata
+                    </p>
+                  </div>
+                </div>
+                <div className="col-span-1 flex items-center">
+                  <TiSortAlphabetically className="text-[#e5e7eb]" size={100} />
                 </div>
               </div>
-              <div className="col-span-1 flex items-center">
-                <IoMdPerson className="text-[#e5e7eb]" size={100} />
+
+              <div className="w-full h-[200px] px-12 cursor-pointer hover:brightness-95 grid grid-cols-3 rounded-lg bg-white shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
+                <div className="col-span-2">
+                  <div className="w-full h-1/2 flex items-end">
+                    <p className="font-inter font-semibold text-2xl text-black">
+                      Kelola Admin
+                    </p>
+                  </div>
+                </div>
+                <div className="col-span-1 flex items-center">
+                  <IoMdPerson className="text-[#e5e7eb]" size={100} />
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

@@ -1,16 +1,65 @@
 "use client";
 
-useState;
-import Navbar from "@/app/components/navbar";
-import Footer from "@/app/components/footer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { routes } from "@/app/api/routes";
+import axios from "axios";
 import { LuEyeOff, LuEye } from "react-icons/lu";
 import Image from "next/image";
 import Logo from "@/app/image/logo-sd-berkarakter-al-biruni.png";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const [isShow, setIsShow] = useState(false);
+  const [inputAdmin, setInputAdmin] = useState({
+    username: "",
+    password: "",
+  });
+  const [dataAdmin, setDataAdmin] = useState({
+    username: "",
+    password: "",
+  });
+  const router = useRouter();
+
+  useEffect(() => {
+    const getDataAdmin = async () => {
+      try {
+        const response = await axios.get(
+          `${routes}/admin/66d583446827d0ae2c03f5df`
+        );
+        setDataAdmin((data) => ({
+          ...data,
+          username: response.data.username,
+          password: response.data.password,
+        }));
+      } catch (error) {
+        console.log("data cek kosong");
+      }
+    };
+    getDataAdmin();
+  }, []);
+
+  const handleInput = (e: any) => {
+    e.preventDefault();
+
+    setInputAdmin((data) => ({
+      ...data,
+      [e.target.id]: e.target.value,
+    }));
+  };
+
+  const handleLogin = (e: any) => {
+    e.preventDefault();
+
+    if (dataAdmin?.username !== inputAdmin.username) {
+      alert("Username salah");
+    } else if (dataAdmin?.password !== inputAdmin.password) {
+      alert("Password salah");
+    } else {
+      router.push("/admin");
+    }
+  };
+
   return (
     <main className="h-screen bg-gray-100 w-full">
       <div className="w-full h-[600px] flex justify-center items-center">
@@ -29,9 +78,12 @@ export default function Home() {
             <div className="flex justify-center my-4">
               <input
                 type="text"
+                id="username"
                 placeholder="Username"
                 autoComplete="off"
                 className="w-[250px] h-[40px] px-2 text-black focus:outline-none focus:border-black border-b-2 border-gray-300"
+                value={inputAdmin.username}
+                onChange={handleInput}
               />
             </div>
 
@@ -39,9 +91,12 @@ export default function Home() {
               <div className="flex bg-white items-center ml-6">
                 <input
                   type={isShow ? "text" : "password"}
+                  id="password"
                   placeholder="password"
                   autoComplete="off"
                   className="w-[250px] h-[40px] px-2 text-black focus:outline-none focus:border-black border-b-2 border-gray-300"
+                  value={inputAdmin.password}
+                  onChange={handleInput}
                 />
                 {isShow ? (
                   <LuEyeOff
@@ -66,11 +121,12 @@ export default function Home() {
             </div>
 
             <div className="flex justify-center my-4">
-              <Link href="/admin">
-                <button className="bg-black rounded-full w-[250px] h-8">
-                  Login
-                </button>
-              </Link>
+              <button
+                className="bg-black rounded-full w-[250px] h-8"
+                onClick={handleLogin}
+              >
+                Login
+              </button>
             </div>
 
             <div className="flex justify-center my-4">
