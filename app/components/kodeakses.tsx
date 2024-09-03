@@ -8,7 +8,7 @@ import { routes } from "../api/routes";
 interface Props {
   setIsMenu: Dispatch<SetStateAction<boolean>>;
 }
-//gausah di passing langsung post aja ke db nanti tinggal dipanggil
+
 export default function Kodeakses({ setIsMenu }: Props) {
   const [kodeAkses, setKodeAkses] = useState({
     kode: "",

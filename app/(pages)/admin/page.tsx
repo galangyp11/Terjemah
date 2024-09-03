@@ -8,6 +8,8 @@ import { TiSortAlphabetically } from "react-icons/ti";
 import { IoMdPerson } from "react-icons/io";
 import { IoPersonCircleSharp } from "react-icons/io5";
 import Kodeakses from "@/app/components/kodeakses";
+import Kelolaadmin from "@/app/components/kelolaadmin";
+import Kelolakata from "@/app/components/kelolakata";
 import Link from "next/link";
 import axios from "axios";
 import { routes } from "@/app/api/routes";
@@ -22,6 +24,20 @@ export default function Page() {
 
     setIsMenu(true);
     setMenu(<Kodeakses setIsMenu={setIsMenu} />);
+  };
+
+  const handlePilihMenuAdmin = (e: any) => {
+    e.preventDefault();
+
+    setIsMenu(true);
+    setMenu(<Kelolaadmin setIsMenu={setIsMenu} />);
+  };
+
+  const handlePilihMenuKata = (e: any) => {
+    e.preventDefault();
+
+    setIsMenu(true);
+    setMenu(<Kelolakata setIsMenu={setIsMenu} />);
   };
 
   useEffect(() => {
@@ -104,7 +120,10 @@ export default function Page() {
                 </div>
               </div>
 
-              <div className="w-full h-[200px] px-12 cursor-pointer hover:brightness-95 grid grid-cols-3 rounded-lg bg-white shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
+              <div
+                className="w-full h-[200px] px-12 cursor-pointer hover:brightness-95 grid grid-cols-3 rounded-lg bg-white shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]"
+                onClick={handlePilihMenuKata}
+              >
                 <div className="col-span-2">
                   <div className="w-full h-1/2 flex items-end">
                     <p className="font-inter font-semibold text-2xl text-black">
@@ -117,7 +136,10 @@ export default function Page() {
                 </div>
               </div>
 
-              <div className="w-full h-[200px] px-12 cursor-pointer hover:brightness-95 grid grid-cols-3 rounded-lg bg-white shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
+              <div
+                className="w-full h-[200px] px-12 cursor-pointer hover:brightness-95 grid grid-cols-3 rounded-lg bg-white shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]"
+                onClick={handlePilihMenuAdmin}
+              >
                 <div className="col-span-2">
                   <div className="w-full h-1/2 flex items-end">
                     <p className="font-inter font-semibold text-2xl text-black">
