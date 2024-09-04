@@ -6,8 +6,8 @@ import axios from "axios";
 import { LuEyeOff, LuEye } from "react-icons/lu";
 import Image from "next/image";
 import Logo from "@/app/image/logo-sd-berkarakter-al-biruni.png";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { setCookie } from "cookies-next";
 
 export default function Home() {
   const [isShow, setIsShow] = useState(false);
@@ -56,6 +56,7 @@ export default function Home() {
     } else if (dataAdmin?.password !== inputAdmin.password) {
       alert("Password salah");
     } else {
+      setCookie("login", "true");
       router.push("/admin");
     }
   };

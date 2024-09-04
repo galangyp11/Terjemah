@@ -9,6 +9,9 @@ interface Props {
   index: number;
   data: any;
   dataKata: any;
+  dataUbah: any;
+  setIsLoading: Dispatch<SetStateAction<any>>;
+  setDataUbah: Dispatch<SetStateAction<any>>;
   setDataKata: Dispatch<SetStateAction<any>>;
 }
 
@@ -17,12 +20,37 @@ export default function Fieldkata({
   no,
   index,
   dataKata,
+  dataUbah,
+  setIsLoading,
+  setDataUbah,
   setDataKata,
 }: Props) {
   const [isUbah, setIsUbah] = useState(false);
 
   const handleUbah = () => {
     setIsUbah(!isUbah);
+  };
+
+  const handleInput = (e: any) => {
+    e.preventDefault();
+
+    setDataUbah((data: any) => ({ ...data, [e.target.id]: e.target.value }));
+  };
+
+  const handleSimpan = async (e: any, id: any) => {
+    e.preventDefault();
+    console.log("daaubh", dataUbah);
+
+    if (dataUbah.indonesia === "") {
+      alert("kata tidak boleh kosong");
+    } else if (dataUbah.sunda === "") {
+      alert("kata tidak boleh kosong");
+    } else {
+      await axios.put(`${routes}/kata/${id}`, dataUbah);
+      setIsUbah(false);
+    }
+
+    setIsLoading(true);
   };
 
   const handleDelete = async (e: any, id: any) => {
@@ -39,7 +67,10 @@ export default function Fieldkata({
         {isUbah ? (
           <input
             placeholder={data.indonesia}
-            className="border-b border-black px-2"
+            className="border-b border-black px-2 w-full"
+            id="indonesia"
+            value={dataUbah.indonesia}
+            onChange={handleInput}
           />
         ) : (
           data.indonesia
@@ -49,27 +80,47 @@ export default function Fieldkata({
         {isUbah ? (
           <input
             placeholder={data.sunda}
-            className="border-b border-black px-2"
+            className="border-b border-black px-2 w-full"
+            id="sunda"
+            value={dataUbah.sunda}
+            onChange={handleInput}
           />
         ) : (
           data.sunda
         )}
       </td>
-      <td className="h-8 flex items-center justify-center gap-4 border border-gray-200">
-        <div
-          className=" bg-yellow-400 cursor-pointer hover:brightness-95 px-2 rounded-lg text-black"
-          onClick={handleUbah}
-        >
-          Ubah
-        </div>
-        <div
-          className="rounded-lg bg-red-600 px-2 text-white cursor-pointer hover:brightness-95"
-          onClick={(e: any) => handleDelete(e, data._id)}
-          //onClick={handleDelete}
-        >
-          Hapus
-        </div>
-      </td>
+
+      {isUbah ? (
+        <td className="h-8 flex items-center justify-center gap-4 border border-gray-200">
+          <div
+            className="bg-sky-600 cursor-pointer hover:brightness-95 px-2 rounded-lg text-white font-semibold"
+            onClick={(e: any) => handleSimpan(e, data._id)}
+          >
+            Simpan
+          </div>
+          <div
+            className="rounded-lg bg-red-600 px-2 text-white cursor-pointer hover:brightness-95 font-semibold"
+            onClick={handleUbah}
+          >
+            Batal
+          </div>
+        </td>
+      ) : (
+        <td className="h-8 flex items-center justify-center gap-4 border border-gray-200">
+          <div
+            className=" bg-yellow-400 cursor-pointer hover:brightness-95 px-2 rounded-lg text-white font-semibold"
+            onClick={handleUbah}
+          >
+            Ubah
+          </div>
+          <div
+            className="rounded-lg bg-red-600 px-2 text-white cursor-pointer hover:brightness-95 font-semibold"
+            onClick={(e: any) => handleDelete(e, data._id)}
+          >
+            Hapus
+          </div>
+        </td>
+      )}
     </tr>
   );
 }

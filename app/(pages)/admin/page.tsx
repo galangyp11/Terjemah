@@ -10,14 +10,23 @@ import { IoPersonCircleSharp } from "react-icons/io5";
 import Kodeakses from "@/app/components/kodeakses";
 import Kelolaadmin from "@/app/components/kelolaadmin";
 import Kelolakata from "@/app/components/kelolakata";
-import Link from "next/link";
 import axios from "axios";
 import { routes } from "@/app/api/routes";
+import { redirect, useRouter } from "next/navigation";
+import { deleteCookie, getCookie } from "cookies-next";
 
 export default function Page() {
+  const cookie = getCookie("login");
+  const router = useRouter();
   const [menu, setMenu] = useState<any>();
   const [dataKode, setDataKode] = useState<any[]>([]);
   const [isMenu, setIsMenu] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!cookie) {
+      redirect("/");
+    }
+  }, []);
 
   const handlePilihMenuKode = (e: any) => {
     e.preventDefault();
@@ -40,6 +49,13 @@ export default function Page() {
     setMenu(<Kelolakata setIsMenu={setIsMenu} />);
   };
 
+  const handleLogout = (e: any) => {
+    e.preventDefault();
+
+    deleteCookie("login");
+    router.push("/");
+  };
+
   useEffect(() => {
     const getKode = async () => {
       const response = await axios.get(`${routes}/kode`);
@@ -47,6 +63,10 @@ export default function Page() {
     };
     getKode();
   }, [isMenu, menu]);
+
+  if (!cookie) {
+    return null;
+  }
 
   return (
     <div className="h-screen w-full grid grid-cols-5">
@@ -86,11 +106,12 @@ export default function Page() {
             </p>
           </div>
           <div className=" flex justify-end items-center">
-            <Link href="/">
-              <button className="w-[150px] h-[30px] bg-red-500 rounded-lg">
-                Logout
-              </button>
-            </Link>
+            <button
+              className="w-[150px] h-[30px] bg-red-500 rounded-lg"
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
           </div>
         </div>
 

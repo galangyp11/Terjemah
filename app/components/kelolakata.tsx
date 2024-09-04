@@ -6,6 +6,7 @@ import axios from "axios";
 import { routes } from "../api/routes";
 import { LuSearch } from "react-icons/lu";
 import Fieldkata from "./fieldkata";
+import { MoonLoader } from "react-spinners";
 
 interface Props {
   setIsMenu: Dispatch<SetStateAction<boolean>>;
@@ -13,13 +14,20 @@ interface Props {
 
 export default function Kelolakata({ setIsMenu }: Props) {
   const [dataKata, setDataKata] = useState<any[]>([]);
+  const [dataUbah, setDataUbah] = useState({
+    indonesia: "",
+    sunda: "",
+  });
   const [cariKata, setCariKata] = useState("");
   const [dataCariKata, setDataCariKata] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getData = async () => {
       const response = await axios.get(`${routes}/kata`);
+      if (response?.data?.length === 0) {
+        setIsLoading(true);
+      }
       const sortIndo = response.data.sort((a: any, b: any) => {
         if (a.indonesia > b.indonesia) {
           return 1;
@@ -33,7 +41,11 @@ export default function Kelolakata({ setIsMenu }: Props) {
       console.log("wedwdwd", response.data);
     };
     getData();
-  }, []);
+
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+  }, [isLoading]);
 
   const handleCariKata = (e: any) => {
     e.preventDefault();
@@ -91,81 +103,100 @@ export default function Kelolakata({ setIsMenu }: Props) {
         </div>
 
         <div className="my-2 h-[420px] overflow-clip flex flex-col">
-          <table className="w-full table-fixed ">
-            <thead className="sticky top-0">
-              <tr>
-                <th className="border border-gray-200 bg-gray-200 w-12">No</th>
-                <th className="border border-gray-200 bg-gray-200">
-                  Indonesia
-                </th>
-                <th className="border border-gray-200 bg-gray-200">Cinyosog</th>
-                <th className="border border-gray-200 bg-gray-200">Aksi</th>
-              </tr>
-            </thead>
-          </table>
-          <div className="flex-1 overflow-y-auto">
-            <table className="w-full table-fixed">
-              <tbody>
-                {dataKata?.map((data, index) => {
-                  const no = index + 1;
-
-                  return (
-                    <Fieldkata
-                      key={data.index}
-                      no={no}
-                      index={index}
-                      data={data}
-                      dataKata={dataKata}
-                      setDataKata={setDataKata}
-                    />
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-          {cariKata === "" ? (
-            <div>
-              <table className="w-full table-fixed">
-                <tfoot>
-                  <tr>
-                    <th colSpan={2} className="bg-gray-200">
-                      Total Kata
-                    </th>
-                    <td className="bg-gray-200 px-4">90</td>
-                    <td className="bg-gray-200 flex justify-center items-center py-1">
-                      <div className="rounded-lg bg-red-600 px-4 py-1 text-white cursor-pointer hover:brightness-95">
-                        Hapus semua kata
-                      </div>
-                    </td>
-                  </tr>
-                </tfoot>
-              </table>
+          {isLoading ? (
+            <div className="flex flex-col gap-4 justify-center items-center w-full h-full">
+              <p className="text-lg font-semibold">Memuat kata</p>
+              <MoonLoader />
             </div>
           ) : (
-            <div className="my-2 h-[420px]">
-              <table className="w-full table-fixed">
-                <tbody>
-                  <tr key={dataCariKata[0]?.index} className="bg-gray-50 h-8">
-                    <td className="text-center w-12 border border-gray-200 h-8">
-                      1
-                    </td>
-                    <td className="px-4 border border-gray-200">
-                      {dataCariKata[0]?.indonesia}
-                    </td>
-                    <td className="px-4 border border-gray-200">
-                      {dataCariKata[0]?.sunda}
-                    </td>
-                    <td className="h-8 flex items-center justify-center gap-4 border border-gray-200">
-                      <div className=" bg-yellow-400 cursor-pointer hover:brightness-95 px-2 rounded-lg text-black">
-                        Ubah
-                      </div>
-                      <div className="rounded-lg bg-red-600 px-2 text-white cursor-pointer hover:brightness-95">
-                        Hapus
-                      </div>
-                    </td>
+            <div className="my-2 h-[420px] overflow-clip flex flex-col">
+              <table className="w-full table-fixed ">
+                <thead className="sticky top-0">
+                  <tr>
+                    <th className="border border-gray-200 bg-gray-200 w-12">
+                      No
+                    </th>
+                    <th className="border border-gray-200 bg-gray-200">
+                      Indonesia
+                    </th>
+                    <th className="border border-gray-200 bg-gray-200">
+                      Cinyosog
+                    </th>
+                    <th className="border border-gray-200 bg-gray-200">Aksi</th>
                   </tr>
-                </tbody>
+                </thead>
               </table>
+              <div className="flex-1 overflow-y-auto">
+                <table className="w-full table-fixed">
+                  <tbody>
+                    {dataKata?.map((data, index) => {
+                      const no = index + 1;
+
+                      return (
+                        <Fieldkata
+                          key={data.index}
+                          no={no}
+                          index={index}
+                          data={data}
+                          dataUbah={dataUbah}
+                          setDataUbah={setDataUbah}
+                          dataKata={dataKata}
+                          setIsLoading={setIsLoading}
+                          setDataKata={setDataKata}
+                        />
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+              {cariKata === "" ? (
+                <div>
+                  <table className="w-full table-fixed">
+                    <tfoot>
+                      <tr>
+                        <th colSpan={2} className="bg-gray-200">
+                          Total Kata
+                        </th>
+                        <td className="bg-gray-200 px-4">90</td>
+                        <td className="bg-gray-200 flex justify-center items-center py-1">
+                          <div className="rounded-lg bg-red-600 px-4 py-1 text-white cursor-pointer hover:brightness-95">
+                            Hapus semua kata
+                          </div>
+                        </td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              ) : (
+                <div className="my-2 h-[420px]">
+                  <table className="w-full table-fixed">
+                    <tbody>
+                      <tr
+                        key={dataCariKata[0]?.index}
+                        className="bg-gray-50 h-8"
+                      >
+                        <td className="text-center w-12 border border-gray-200 h-8">
+                          1
+                        </td>
+                        <td className="px-4 border border-gray-200">
+                          {dataCariKata[0]?.indonesia}
+                        </td>
+                        <td className="px-4 border border-gray-200">
+                          {dataCariKata[0]?.sunda}
+                        </td>
+                        <td className="h-8 flex items-center justify-center gap-4 border border-gray-200">
+                          <div className=" bg-yellow-400 cursor-pointer hover:brightness-95 px-2 rounded-lg text-black">
+                            Ubah
+                          </div>
+                          <div className="rounded-lg bg-red-600 px-2 text-white cursor-pointer hover:brightness-95">
+                            Hapus
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              )}
             </div>
           )}
         </div>
