@@ -117,11 +117,11 @@ export default function Koleksi() {
       </div>
 
       <div className="w-full flex justify-center mb-8">
-        <div className="lg:w-[400px] w-[300px] h-10 px-2 rounded-lg flex bg-krem1 text-coklat text-lg font-alata font-medium shadow-[0px_-1px_0px_2px_#674636]">
+        <div className="lg:w-[400px] w-[300px] h-10 px-2 rounded-lg flex bg-white text-coklat text-lg font-alata font-medium shadow-[0px_2px_0px_3px_#674636]">
           <input
             type="text"
             placeholder="Cari Kata...."
-            className="w-full h-full bg-krem1 focus:outline-none ml-2"
+            className="w-full h-full focus:outline-none ml-2"
             value={cariKata}
             onChange={handleCariKata}
           />
@@ -191,7 +191,7 @@ export default function Koleksi() {
                 {cariKata === "" && isLoading === false ? (
                   <div className=" bg-krem1 max-h-full overflow-y-auto rounded-lg scrollbar-thin scrollbar-thumb-coklat scrollbar-track-krem2">
                     {isSortIndonesia
-                      ? dataKataGroup?.map((data) => {
+                      ? dataKataGroup?.map((data, i) => {
                           return (
                             <Groupkata
                               data={data}

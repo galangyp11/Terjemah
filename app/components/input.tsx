@@ -30,7 +30,7 @@ export default function Input() {
       alert("Kata tidak boleh kosong");
     } else if (inputKata.sunda === "") {
       alert("Kata tidak boleh kosong");
-    } else if (dataCariKata.length >= 1) {
+    } else if (dataCariKata?.length >= 1) {
       alert("Kata sudah ada di koleksi");
     } else {
       await axios.post(`${routes}/kata`, inputKata);
@@ -56,9 +56,9 @@ export default function Input() {
       }
     };
     onSearchItem();
-  }, [inputKata]);
+  }, []);
 
-  console.log("cariKata", dataCariKata);
+  // console.log("cariKata", dataCariKata);
 
   return (
     <div className="w-full h-[600px] py-12 lg:container">
@@ -77,7 +77,7 @@ export default function Input() {
             <input
               type="text"
               id="indonesia"
-              className="lg:w-2/3 w-full lg:h-24 h-12 rounded-xl text-black text-2xl font-alata font-medium px-6 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]"
+              className="lg:w-2/3 w-full lg:h-24 h-12 rounded-xl text-black text-2xl font-alata font-medium px-6 shadow-[0px_3px_0px_4px_#674636] focus:outline-none"
               value={inputKata.indonesia}
               onChange={handleInput}
               autoComplete="off"
@@ -87,13 +87,13 @@ export default function Input() {
 
         <div className="col-span-1  lg:px-0 px-4">
           <p className="font-alata font-medium text-coklat text-3xl text-center mb-6">
-            Bahasa Sunda
+            Bahasa Cinyosog
           </p>
           <div className="flex justify-center items-center">
             <input
               type="text"
               id="sunda"
-              className="lg:w-2/3 w-full lg:h-24 h-12 rounded-xl text-black text-2xl font-alata font-medium px-6 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]"
+              className="lg:w-2/3 w-full lg:h-24 h-12 rounded-xl text-black text-2xl font-alata font-medium px-6 shadow-[0px_3px_0px_4px_#674636] focus:outline-none"
               value={inputKata.sunda}
               onChange={handleInput}
               autoComplete="off"

@@ -33,6 +33,20 @@ export default function Groupkata({ data, isSortIndonesia }: Props) {
       {isOpenGroup ? (
         <div className="w-full max-h-full">
           {data?.kataGroup?.map((item: any) => {
+            const syllableRegex =
+              /[^aeiouy]*[aeiouy]+(?:[^aeiouy]*$|[^aeiouy](?=[^aeiouy]))?/gi;
+
+            function syllabify(words: string) {
+              return words.match(syllableRegex);
+            }
+
+            const sukuKataInd = [];
+            const sukuKataSund = [];
+
+            sukuKataInd.push(item?.indonesia);
+            sukuKataSund.push(item?.sunda);
+
+            console.log("skij", sukuKataInd);
             return isSortIndonesia ? (
               <div
                 key={item.index}
@@ -40,7 +54,7 @@ export default function Groupkata({ data, isSortIndonesia }: Props) {
               >
                 <div className="col-span-1 w-full h-full flex items-center border border-krem2 px-28 gap-10">
                   <p className="font-semibold">{item?.indonesia}</p>
-                  <p className="">/bu·at·su·ku·ka·ta/</p>
+                  <p className="">/{sukuKataInd.map(syllabify)}/</p>
                 </div>
                 <div className="col-span-1 w-full h-full flex items-center border border-krem2 px-28 gap-10">
                   <p className="font-semibold">{item?.sunda}</p>

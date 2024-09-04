@@ -7,7 +7,7 @@ import Footer from "./components/footer";
 export default function Home() {
   return (
     <main className="h-auto bg-krem1 w-full">
-      <div className="w-full">
+      <div className="w-full sticky top-0 z-50">
         <Navbar />
       </div>
 
