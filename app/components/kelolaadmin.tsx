@@ -49,8 +49,8 @@ export default function Kelolaadmin({ setIsMenu }: Props) {
   };
   return (
     <div className="w-full">
-      <div className="w-full grid grid-cols-5">
-        <div className="col-span-1 flex items-center">
+      <div className="w-full grid grid-cols-5 lg:gap-0 gap-6">
+        <div className="lg:col-span-1 col-span-5 flex items-center">
           <div
             className="bg-white w-[150px] h-[35px] rounded-lg flex items-center justify-center gap-2 cursor-pointer hover:brightness-95 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]"
             onClick={() => {
@@ -61,10 +61,10 @@ export default function Kelolaadmin({ setIsMenu }: Props) {
             <p className="text-black">Kembali</p>
           </div>
         </div>
-        <div className="col-span-3 flex justify-center items-center">
+        <div className="lg:col-span-3 col-span-5 flex justify-center items-center">
           <p className="text-black text-2xl font-semibold">Kelola Admin</p>
         </div>
-        <div className="col-span-1"></div>
+        <div className="lg:col-span-1 hidden"></div>
       </div>
 
       <div className="w-full flex justify-center">

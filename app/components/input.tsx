@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { routes } from "../api/routes";
 import { motion } from "framer-motion";
+import AlertBerhasil from "@/app/components/alert/alertBerhasil";
+import AlertGagal from "@/app/components/alert/alertGagal";
 
 export default function Input() {
   const [inputKata, setInputKata] = useState({
@@ -12,6 +14,10 @@ export default function Input() {
     sunda: "",
   });
   const [dataCariKata, setDataCariKata] = useState<any[]>([]);
+
+  const [isAlertBerhasil, setIsAlertBerhasil] = useState(false);
+  const [isAlertGagal, setIsAlertGagal] = useState(false);
+  const [textAlert, setTextAlert] = useState("");
 
   const handleInput = (e: any) => {
     e.preventDefault();
@@ -27,16 +33,21 @@ export default function Input() {
     e.preventDefault();
 
     if (inputKata.indonesia === "") {
-      alert("Kata tidak boleh kosong");
+      setIsAlertGagal(true);
+      setTextAlert("Kata tidak boleh kosong");
     } else if (inputKata.sunda === "") {
-      alert("Kata tidak boleh kosong");
+      setIsAlertGagal(true);
+      setTextAlert("Kata tidak boleh kosong");
     } else if (dataCariKata?.length >= 1) {
-      alert("Kata sudah ada di koleksi");
+      setIsAlertGagal(true);
+      setTextAlert("Kata sudah ada di koleksi");
     } else {
       await axios.post(`${routes}/kata`, inputKata);
+      setIsAlertBerhasil(true);
+      setTextAlert("Kata berhasil dimasukan");
     }
     setInputKata((data) => ({ ...data, indonesia: "", sunda: "" }));
-    console.log(inputKata);
+    //console.log(inputKata);
   };
 
   const handleHapusCariKata = (e: any) => {
@@ -56,9 +67,10 @@ export default function Input() {
       }
     };
     onSearchItem();
-  }, []);
+  }, [inputKata.indonesia, inputKata.sunda]);
 
-  // console.log("cariKata", dataCariKata);
+  console.log("cariKata", dataCariKata);
+  console.log("input", inputKata);
 
   return (
     <div className="w-full h-[600px] py-12 lg:container">
@@ -70,7 +82,7 @@ export default function Input() {
 
       <div className="grid grid-cols-2 w-full h-[300px] justify-center items-center">
         <div className="col-span-1 lg:px-0 px-4">
-          <p className="font-alata font-medium text-coklat text-3xl text-center mb-6">
+          <p className="font-alata font-medium text-coklat lg:text-3xl text-xl text-center mb-6">
             Bahasa Indonesia
           </p>
           <div className="flex justify-center items-center">
@@ -86,7 +98,7 @@ export default function Input() {
         </div>
 
         <div className="col-span-1  lg:px-0 px-4">
-          <p className="font-alata font-medium text-coklat text-3xl text-center mb-6">
+          <p className="font-alata font-medium text-coklat lg:text-3xl text-xl text-center mb-6">
             Bahasa Cinyosog
           </p>
           <div className="flex justify-center items-center">
@@ -162,6 +174,17 @@ export default function Input() {
           <div className="w-[200px] h-[50px] rounded-full bg-coklat"></div>
         </div>
       </div>
+
+      {isAlertBerhasil ? (
+        <AlertBerhasil
+          setIsAlertBerhasil={setIsAlertBerhasil}
+          textAlert={textAlert}
+        />
+      ) : null}
+
+      {isAlertGagal ? (
+        <AlertGagal setIsAlertGagal={setIsAlertGagal} textAlert={textAlert} />
+      ) : null}
     </div>
   );
 }

@@ -14,6 +14,7 @@ import axios from "axios";
 import { routes } from "@/app/api/routes";
 import { redirect, useRouter } from "next/navigation";
 import { deleteCookie, getCookie } from "cookies-next";
+import { IoIosLogOut } from "react-icons/io";
 
 export default function Page() {
   const cookie = getCookie("login");
@@ -70,7 +71,7 @@ export default function Page() {
 
   return (
     <div className="h-screen w-full grid grid-cols-5">
-      <div className="col-span-1 bg-white h-full p-6">
+      <div className="col-span-1 bg-white h-full p-6 lg:inline hidden">
         <div className="w-full flex justify-center">
           <IoPersonCircleSharp className="text-[#e5e7eb]" size={150} />
         </div>
@@ -97,21 +98,28 @@ export default function Page() {
         </div>
       </div>
 
-      <div className="col-span-4 h-full  bg-gray-200 ">
-        <div className="w-full h-16 px-6 grid grid-cols-2 bg-white shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
-          <div className="h-full w-full flex justify-start items-center gap-4">
+      <div className="lg:col-span-4 col-span-5 h-full bg-gray-200 ">
+        <div className="w-full h-16 px-6 grid lg:grid-cols-3 grid-cols-4 bg-white shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
+          <div className="lg:col-span-2 col-span-3 h-full w-full flex justify-start items-center gap-4">
             <Image src={Logo} alt="" className="h-12 w-auto" />
-            <p className="text-biru font-inter font-semibold lg:text-xl text-md">
+            <p className="text-coklat font-inter font-semibold lg:text-xl text-sm">
               SD Berkarakter Al-Biruni
             </p>
           </div>
-          <div className=" flex justify-end items-center">
+
+          <div className="col-span-1 flex justify-end items-center">
             <button
-              className="w-[150px] h-[30px] bg-red-500 rounded-lg"
+              className="w-[150px] h-[30px] bg-red-500 rounded-lg lg:inline hidden"
               onClick={handleLogout}
             >
               Logout
             </button>
+            <div
+              className="lg:hidden bg-red-500 rounded-lg h-[40px] w-[40px] flex justify-center items-center"
+              onClick={handleLogout}
+            >
+              <IoIosLogOut size={30} color="white" />
+            </div>
           </div>
         </div>
 
@@ -119,13 +127,13 @@ export default function Page() {
           {isMenu ? (
             menu
           ) : (
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid lg:grid-cols-3 grid-cols-1 gap-4">
               <div
                 className="w-full h-[200px] px-12 cursor-pointer hover:brightness-95 grid grid-cols-3 rounded-lg bg-white shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]"
                 onClick={handlePilihMenuKode}
               >
                 <div className="col-span-2">
-                  <div className="w-full h-1/2 flex items-end">
+                  <div className=" w-full h-1/2 flex items-end">
                     <p className="font-inter font-semibold text-2xl text-black">
                       Kode Akses
                     </p>
@@ -146,7 +154,7 @@ export default function Page() {
                 onClick={handlePilihMenuKata}
               >
                 <div className="col-span-2">
-                  <div className="w-full h-1/2 flex items-end">
+                  <div className="w-full lg:h-1/2 h-full flex lg:items-end items-center">
                     <p className="font-inter font-semibold text-2xl text-black">
                       Kelola Kata
                     </p>
@@ -162,7 +170,7 @@ export default function Page() {
                 onClick={handlePilihMenuAdmin}
               >
                 <div className="col-span-2">
-                  <div className="w-full h-1/2 flex items-end">
+                  <div className="w-full lg:h-1/2 h-full flex lg:items-end items-center">
                     <p className="font-inter font-semibold text-2xl text-black">
                       Kelola Admin
                     </p>

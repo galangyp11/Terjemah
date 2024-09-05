@@ -7,12 +7,19 @@ import { deleteCookie, getCookie, setCookie } from "cookies-next";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { routes } from "@/app/api/routes";
+import { motion, AnimatePresence } from "framer-motion";
+import AlertBerhasil from "@/app/components/alert/alertBerhasil";
+import AlertGagal from "@/app/components/alert/alertGagal";
 
 export default function Home() {
   const cookie = getCookie("akses");
   const [isAkses, setIsAkses] = useState(false);
   const [inputKode, setInputKode] = useState({ kode: "" });
   const [dataKode, setDataKode] = useState<any[]>([]);
+
+  const [isAlertBerhasil, setIsAlertBerhasil] = useState(false);
+  const [isAlertGagal, setIsAlertGagal] = useState(false);
+  const [textAlert, setTextAlert] = useState("");
 
   useEffect(() => {
     const navigationType = (
@@ -51,8 +58,11 @@ export default function Home() {
     if (inputKode.kode === dataKode[0]?.kode) {
       setCookie("akses", "true");
       setIsAkses(true);
+      setIsAlertBerhasil(true);
+      setTextAlert("Berhasil Masuk!");
     } else {
-      alert("Kode yang kamu masukan salah");
+      setIsAlertGagal(true);
+      setTextAlert("Kode Salah!");
     }
   };
 
@@ -70,9 +80,19 @@ export default function Home() {
 
       <div className="mt-10 w-full flex justify-center">
         {!isAkses ? (
-          <div className="absolute w-full h-[600px] mt-20 top-0 left-0 z-20 ">
+          <div className="absolute w-full h-[600px] mt-20 top-0 left-0 z-20">
             <div className="w-full h-full flex justify-center items-center bg-black brightness-90 opacity-75"></div>
-            <div className="absolute p-6 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-krem1 w-[450px] h-[250px] rounded-lg shadow-[0px_3px_0px_4px_#674636]">
+            <motion.div
+              layout
+              initial={{ opacity: 0, y: 50, scale: 0.3 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{
+                opacity: 0,
+                scale: 0.5,
+                transition: { duration: 0.2 },
+              }}
+              className="absolute p-6 top-1/4 left-0 right-0 mx-auto bg-krem1 lg:w-[450px] w-[300px] h-[250px] rounded-lg shadow-[0px_3px_0px_4px_#674636]"
+            >
               <div className="flex flex-col w-full h-full items-center justify-center gap-6">
                 <p className="text-4xl text-coklat font-alata font-semibold">
                   Kode
@@ -98,7 +118,7 @@ export default function Home() {
                   <div className="w-[200px] h-[50px] rounded-full bg-coklat"></div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         ) : null}
         <Input />
@@ -107,6 +127,17 @@ export default function Home() {
       <div>
         <Footer />
       </div>
+
+      {isAlertBerhasil ? (
+        <AlertBerhasil
+          setIsAlertBerhasil={setIsAlertBerhasil}
+          textAlert={textAlert}
+        />
+      ) : null}
+
+      {isAlertGagal ? (
+        <AlertGagal setIsAlertGagal={setIsAlertGagal} textAlert={textAlert} />
+      ) : null}
     </main>
   );
 }

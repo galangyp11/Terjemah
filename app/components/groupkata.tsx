@@ -14,7 +14,7 @@ export default function Groupkata({ data, isSortIndonesia }: Props) {
   return (
     <div
       key={data?.index}
-      className="w-full h-auto cursor-pointer "
+      className="w-full h-auto cursor-pointer"
       onClick={() => setIsOpenGroup(!isOpenGroup)}
     >
       <div className="w-full grid grid-cols-2 h-12 border-b-4 border-krem2 bg-krem1 px-6 hover:brightness-95">
@@ -31,7 +31,7 @@ export default function Groupkata({ data, isSortIndonesia }: Props) {
         </div>
       </div>
       {isOpenGroup ? (
-        <div className="w-full max-h-full">
+        <div className="w-full max-h-full overflow-x-hidden">
           {data?.kataGroup?.map((item: any) => {
             const syllableRegex =
               /[^aeiouy]*[aeiouy]+(?:[^aeiouy]*$|[^aeiouy](?=[^aeiouy]))?/gi;
@@ -50,15 +50,15 @@ export default function Groupkata({ data, isSortIndonesia }: Props) {
             return isSortIndonesia ? (
               <div
                 key={item.index}
-                className="h-10 w-full bg-krem1 grid grid-cols-2 font-alata text-coklat font-medium text-base"
+                className="min-h-10 h-auto max-h-16 lg:w-full w-[300px] bg-krem1 grid grid-cols-2 font-alata text-coklat font-medium text-base"
               >
-                <div className="col-span-1 w-full h-full flex items-center border border-krem2 px-28 gap-10">
+                <div className="col-span-1 w-full h-full flex justify-center items-center border border-krem2 lg:px-28 px-4">
                   <p className="font-semibold">{item?.indonesia}</p>
-                  <p className="">/{sukuKataInd.map(syllabify)}/</p>
+                  {/* <p className="">/{sukuKataInd.map(syllabify)}/</p> */}
                 </div>
-                <div className="col-span-1 w-full h-full flex items-center border border-krem2 px-28 gap-10">
+                <div className="col-span-1 w-full h-full flex justify-center items-center border border-krem2 px-28">
                   <p className="font-semibold">{item?.sunda}</p>
-                  <p className="">/bu·at·su·ku·ka·ta/</p>
+                  {/* <p className="">/bu·at·su·ku·ka·ta/</p> */}
                 </div>
               </div>
             ) : (
@@ -66,13 +66,13 @@ export default function Groupkata({ data, isSortIndonesia }: Props) {
                 key={item.index}
                 className="h-10 w-full bg-krem1 grid grid-cols-2 font-alata text-coklat font-medium text-base"
               >
-                <div className="col-span-1 w-full h-full flex items-center border border-krem2 px-28 gap-10">
+                <div className="col-span-1 w-full h-full flex justify-center items-center border border-krem2 px-28">
                   <p className="font-semibold">{item?.sunda}</p>
-                  <p className="">/bu·at·su·ku·ka·ta/</p>
+                  {/* <p className="">/bu·at·su·ku·ka·ta/</p> */}
                 </div>
-                <div className="col-span-1 w-full h-full flex items-center border border-krem2 px-28 gap-10">
+                <div className="col-span-1 w-full h-full flex justify-center items-center border border-krem2 px-28">
                   <p className="font-semibold">{item?.indonesia}</p>
-                  <p className="">/bu·at·su·ku·ka·ta/</p>
+                  {/* <p className="">/bu·at·su·ku·ka·ta/</p> */}
                 </div>
               </div>
             );

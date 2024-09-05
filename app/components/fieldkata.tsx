@@ -62,8 +62,8 @@ export default function Fieldkata({
   };
   return (
     <tr className={index % 2 === 0 ? "bg-gray-50 h-8" : "bg-gray-100 h-8"}>
-      <td className="text-center w-12 border border-gray-200">{no}</td>
-      <td className="px-4 border border-gray-200">
+      <td className="text-center lg:w-12 border border-gray-200">{no}</td>
+      <td className="px-4 border border-gray-200 lg:w-auto w-[100px]">
         {isUbah ? (
           <input
             placeholder={data.indonesia}
@@ -76,7 +76,7 @@ export default function Fieldkata({
           data.indonesia
         )}
       </td>
-      <td className="px-4 border border-gray-200">
+      <td className="px-4 border border-gray-200 lg:w-auto w-[100px]">
         {isUbah ? (
           <input
             placeholder={data.sunda}
@@ -91,30 +91,30 @@ export default function Fieldkata({
       </td>
 
       {isUbah ? (
-        <td className="h-8 flex items-center justify-center gap-4 border border-gray-200">
+        <td className="lg:h-8 flex lg:flex-row flex-col items-center justify-center lg:gap-4 gap-2 border border-gray-200 lg:w-auto h-[70px] w-[100px]">
           <div
-            className="bg-sky-600 cursor-pointer hover:brightness-95 px-2 rounded-lg text-white font-semibold"
+            className="bg-sky-600 cursor-pointer hover:brightness-95 px-2 rounded-lg text-white font-semibold w-[70px]"
             onClick={(e: any) => handleSimpan(e, data._id)}
           >
             Simpan
           </div>
           <div
-            className="rounded-lg bg-red-600 px-2 text-white cursor-pointer hover:brightness-95 font-semibold"
+            className="rounded-lg bg-red-600 px-2 text-white cursor-pointer hover:brightness-95 font-semibold w-[70px]"
             onClick={handleUbah}
           >
             Batal
           </div>
         </td>
       ) : (
-        <td className="h-8 flex items-center justify-center gap-4 border border-gray-200">
+        <td className="lg:h-8 flex lg:flex-row flex-col items-center justify-center lg:gap-4 gap-2 border border-gray-200 lg:w-auto h-[70px] w-[100px]">
           <div
-            className=" bg-yellow-400 cursor-pointer hover:brightness-95 px-2 rounded-lg text-white font-semibold"
+            className=" bg-yellow-400 cursor-pointer hover:brightness-95 px-2 rounded-lg text-white font-semibold w-[70px]"
             onClick={handleUbah}
           >
             Ubah
           </div>
           <div
-            className="rounded-lg bg-red-600 px-2 text-white cursor-pointer hover:brightness-95 font-semibold"
+            className="rounded-lg bg-red-600 px-2 text-white cursor-pointer hover:brightness-95 font-semibold w-[70px]"
             onClick={(e: any) => handleDelete(e, data._id)}
           >
             Hapus

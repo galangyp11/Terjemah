@@ -70,8 +70,8 @@ export default function Kelolakata({ setIsMenu }: Props) {
 
   return (
     <div className="w-full">
-      <div className="w-full grid grid-cols-5">
-        <div className="col-span-1 flex items-center">
+      <div className="w-full grid grid-cols-5 lg:gap-0 gap-6">
+        <div className="lg:col-span-1 col-span-5 flex items-center">
           <div
             className="bg-white w-[150px] h-[35px] rounded-lg flex items-center justify-center gap-2 cursor-pointer hover:brightness-95 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]"
             onClick={() => {
@@ -82,13 +82,14 @@ export default function Kelolakata({ setIsMenu }: Props) {
             <p className="text-black">Kembali</p>
           </div>
         </div>
-        <div className="col-span-3 flex justify-center items-center">
+
+        <div className="lg:col-span-3 col-span-5 flex justify-center items-center">
           <p className="text-black text-2xl font-semibold">Kelola Kata</p>
         </div>
         <div className="col-span-1"></div>
       </div>
 
-      <div className="w-full max-h-[600px] mt-12 p-6 text-black bg-white rounded-lg shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
+      <div className="w-full max-h-[600px] lg:mt-12 mt-6 p-6 text-black bg-white rounded-lg shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
         <div className="w-full">
           <div className="w-64 flex p-2 text-md gap-1 items-center rounded-lg shadow-[0px_0px_1px_1px_#00000024]">
             <LuSearch size={22} />
@@ -110,19 +111,21 @@ export default function Kelolakata({ setIsMenu }: Props) {
             </div>
           ) : (
             <div className="my-2 h-[420px] overflow-clip flex flex-col">
-              <table className="w-full table-fixed ">
-                <thead className="sticky top-0">
+              <table className="w-full lg:table-fixed ">
+                <thead className="sticky top-0 ">
                   <tr>
                     <th className="border border-gray-200 bg-gray-200 w-12">
                       No
                     </th>
-                    <th className="border border-gray-200 bg-gray-200">
+                    <th className="border border-gray-200 bg-gray-200 lg:w-auto w-[100px]">
                       Indonesia
                     </th>
-                    <th className="border border-gray-200 bg-gray-200">
+                    <th className="border border-gray-200 bg-gray-200 lg:w-auto w-[100px]">
                       Cinyosog
                     </th>
-                    <th className="border border-gray-200 bg-gray-200">Aksi</th>
+                    <th className="border border-gray-200 bg-gray-200 lg:w-auto w-[100px]">
+                      Aksi
+                    </th>
                   </tr>
                 </thead>
               </table>
@@ -154,13 +157,13 @@ export default function Kelolakata({ setIsMenu }: Props) {
                   <table className="w-full table-fixed">
                     <tfoot>
                       <tr>
-                        <th colSpan={2} className="bg-gray-200">
-                          Total Kata
-                        </th>
-                        <td className="bg-gray-200 px-4">90</td>
+                        <th className="bg-gray-200">Total Kata</th>
+                        <td className="bg-gray-200 px-4 w-[50px]">90</td>
                         <td className="bg-gray-200 flex justify-center items-center py-1">
-                          <div className="rounded-lg bg-red-600 px-4 py-1 text-white cursor-pointer hover:brightness-95">
-                            Hapus semua kata
+                          <div className="w-full h-12 px-4 py-1 flex justify-center items-center">
+                            <div className="rounded-lg flex justify-center items-center bg-red-600 text-white text-xs cursor-pointer hover:brightness-95 h-8 w-[200px]">
+                              Hapus semua
+                            </div>
                           </div>
                         </td>
                       </tr>

@@ -39,8 +39,12 @@ export default function homepage() {
               ease: [0, 0.71, 0.2, 1.01],
             }}
           >
-            <Image src={Karakter} alt="" className="h-[300px] w-auto" />
-            <div className="w-[350px] lg:-my-6">
+            <Image
+              src={Karakter}
+              alt=""
+              className="h-[300px] w-auto z-30 relative"
+            />
+            <div className="w-[350px]">
               <p className="text-hijau text-lg font-medium font-alata">
                 /ter·je·mah/ v, menerjemahkan/me·ner·je·mah·kan/ v menyalin
                 (memindahkan) suatu bahasa ke bahasa lain;
@@ -97,7 +101,7 @@ export default function homepage() {
       </div>
 
       <div className="w-full h-0">
-        <div className="absolute top-24 left-1/2">
+        <div className="lg:absolute hidden lg:top-24 lg:left-1/2 top-64 h-auto">
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -120,7 +124,7 @@ export default function homepage() {
           </motion.div>
         </div>
 
-        <div className="absolute top-56 left-24">
+        <div className="lg:absolute top-56 left-24 hidden">
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -131,7 +135,7 @@ export default function homepage() {
             }}
           >
             <motion.div
-              animate={{ rotate: [0, 360], y: [null, 70, 0], x: [null, 70, 0] }}
+              animate={{ rotate: [0, 360], y: [null, 70, 0] }}
               transition={{ repeat: Infinity, duration: 10, ease: "easeInOut" }}
             >
               <Image

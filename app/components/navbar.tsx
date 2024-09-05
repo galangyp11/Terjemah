@@ -1,13 +1,16 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Logo from "@/app/image/logo-sd-berkarakter-al-biruni.png";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { IoMenu } from "react-icons/io5";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
   const currentPath = usePathname();
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div
@@ -25,55 +28,121 @@ export default function Navbar() {
         }
       >
         <Image src={Logo} alt="" className="h-12 w-auto" />
-        <p className="text-biru font-inter font-semibold lg:text-xl text-md">
+        <p className="text-coklat font-inter font-semibold lg:text-xl text-md">
           SD Berkarakter Al-Biruni
         </p>
       </div>
 
-      <Link
-        href="/"
-        className={
-          currentPath !== "/" ? "h-full w-[10%] px-2 py-[4px]" : "hidden"
-        }
-      >
-        <div className="h-full w-full flex justify-center items-center bg-coklat rounded-full hover:outline hover:outline-4 hover:outline-offset-2 hover:outline-coklat">
-          <p className="text-krem1 font-inter font-semibold text-xl">Beranda</p>
-        </div>
-      </Link>
+      <div className="lg:grid lg:grid-cols-2 lg:gap-4 hidden">
+        <Link
+          href="/"
+          className={
+            currentPath !== "/"
+              ? "col-span-1 h-full w-full px-2 py-[4px] bg-coklat rounded-full hover:outline hover:outline-4 hover:outline-offset-2 hover:outline-coklat"
+              : "hidden"
+          }
+        >
+          <div className="h-full w-full flex justify-center items-center">
+            <p className="text-krem1 font-inter font-semibold text-xl">
+              Beranda
+            </p>
+          </div>
+        </Link>
 
-      <Link
-        href="/koleksi"
-        className={
-          currentPath === "/masuk" ? "h-full w-[10%] px-2 py-[4px]" : "hidden"
-        }
-      >
-        <div
+        <Link
+          href="/koleksi"
           className={
             currentPath === "/masuk"
-              ? "h-full w-full flex justify-center items-center bg-coklat rounded-full hover:outline hover:outline-4 hover:outline-offset-2 hover:outline-coklat"
+              ? "col-span-1 h-full w-full px-2 py-[4px] bg-coklat rounded-full hover:outline hover:outline-4 hover:outline-offset-2 hover:outline-coklat"
               : "hidden"
           }
         >
-          <p className="text-krem1 font-inter font-semibold text-xl">Koleksi</p>
-        </div>
-      </Link>
+          <div
+            className={
+              currentPath === "/masuk"
+                ? "h-full w-full flex justify-center items-center"
+                : "hidden"
+            }
+          >
+            <p className="text-krem1 font-inter font-semibold text-xl">
+              Koleksi
+            </p>
+          </div>
+        </Link>
 
-      <Link
-        href="/masuk"
-        className={
-          currentPath === "/koleksi" ? "h-full w-[10%] px-2 py-[4px]" : "hidden"
-        }
-      >
+        <Link
+          href="/masuk"
+          className={
+            currentPath === "/koleksi"
+              ? "col-span-1 h-full w-full px-2 py-[4px] bg-coklat rounded-full hover:outline hover:outline-4 hover:outline-offset-2 hover:outline-coklat"
+              : "hidden"
+          }
+        >
+          <div
+            className={
+              currentPath == "/koleksi"
+                ? "h-full w-full flex justify-center items-center"
+                : "hidden"
+            }
+          >
+            <p className="text-krem1 font-inter font-semibold text-xl">
+              Masukan
+            </p>
+          </div>
+        </Link>
+      </div>
+
+      <div className="lg:hidden flex flex-row justify-center items-center">
         <div
           className={
-            currentPath == "/koleksi"
-              ? "h-full w-full flex justify-center items-center bg-coklat rounded-full hover:outline hover:outline-4 hover:outline-offset-2 hover:outline-coklat"
-              : "hidden"
+            currentPath === "/"
+              ? "hidden"
+              : "bg-[#F6995C] rounded-lg p-1 lg:hidden"
           }
+          onClick={() => setIsOpen(!isOpen)}
         >
-          <p className="text-krem1 font-inter font-semibold text-xl">Masukan</p>
+          <IoMenu color="#FFF8E8" size={30} />
         </div>
-      </Link>
+        {isOpen ? (
+          <div>
+            <motion.div
+              initial={{ opacity: 0, y: -60 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{
+                opacity: 0,
+                scale: 0.5,
+                transition: { duration: 0.2 },
+              }}
+              className="bg-krem1 w-1/2 h-28 rounded-lg px-4 absolute top-14 right-6 shadow-[-2px_2px_0px_4px_#674636]"
+            >
+              <div className="border-b border-coklat h-1/2 flex justify-center items-center">
+                <Link href="/" onClick={() => setIsOpen(false)}>
+                  <p className="text-2xl text-coklat font-alata font-semibold">
+                    Beranda
+                  </p>
+                </Link>
+              </div>
+              {currentPath === "/koleksi" ? (
+                <div className="h-1/2 flex justify-center items-center">
+                  <Link href="/masuk">
+                    <p className="text-2xl text-coklat font-alata font-semibold">
+                      Masukan
+                    </p>
+                  </Link>
+                </div>
+              ) : (
+                <div className="h-1/2 flex justify-center items-center">
+                  <Link href="/koleksi" onClick={() => setIsOpen(false)}>
+                    <p className="text-2xl text-coklat font-alata font-semibold">
+                      Koleksi
+                    </p>
+                  </Link>
+                </div>
+              )}
+            </motion.div>
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 }
