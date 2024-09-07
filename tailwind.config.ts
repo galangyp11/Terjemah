@@ -16,9 +16,9 @@ const config: Config = {
         mont: ["Montserrat Alternates", "sans-serif"],
       },
       colors: {
-        biru1: "#021526",
+        biru1: "#F6995C",
         biru2: "#0A2647",
-        biru3: "#205295",
+        biru3: "#176B87",
         coklat: "#674636",
         krem1: "#FFF8E8",
         krem2: "#F7EED3",

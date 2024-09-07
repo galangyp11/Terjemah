@@ -29,7 +29,7 @@ export default function Navbar() {
       >
         <Image src={Logo} alt="" className="h-12 w-auto" />
         <p className="text-coklat font-inter font-semibold lg:text-xl text-md">
-          SD Berkarakter Al-Biruni
+          SD Berkarakter Al Biruni
         </p>
       </div>
 
