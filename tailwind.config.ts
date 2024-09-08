@@ -18,11 +18,11 @@ const config: Config = {
       colors: {
         biru1: "#F6995C",
         biru2: "#0A2647",
-        biru3: "#176B87",
+        biru3: "#04043B",
         coklat: "#674636",
         krem1: "#FFF8E8",
         krem2: "#F7EED3",
-        hijau: "#AAB396",
+        orange: "#F6995C",
       },
       backgroundImage: {
         bg_home: "url('/app/image/bg-home.svg')",

@@ -34,62 +34,62 @@ export default function Navbar() {
       </div>
 
       <div className="lg:grid lg:grid-cols-2 lg:gap-4 hidden">
-        <Link
-          href="/"
+        <div
           className={
             currentPath !== "/"
-              ? "col-span-1 h-full w-full px-2 py-[4px] bg-coklat rounded-full hover:outline hover:outline-4 hover:outline-offset-2 hover:outline-coklat"
+              ? "w-full h-full flex justify-center items-center col-span-1"
               : "hidden"
           }
         >
-          <div className="h-full w-full flex justify-center items-center">
-            <p className="text-krem1 font-inter font-semibold text-xl">
-              Beranda
-            </p>
-          </div>
-        </Link>
+          <Link
+            href="/"
+            className="h-[40px] w-[100px] px-2 py-[4px] bg-orange rounded-lg hover:outline hover:outline-2 hover:outline-offset-1 hover:outline-coklat"
+          >
+            <div className="h-full w-full flex justify-center items-center">
+              <p className="text-krem1 font-inter font-medium text-lg">
+                Beranda
+              </p>
+            </div>
+          </Link>
+        </div>
 
-        <Link
-          href="/koleksi"
+        <div
           className={
             currentPath === "/masuk"
-              ? "col-span-1 h-full w-full px-2 py-[4px] bg-coklat rounded-full hover:outline hover:outline-4 hover:outline-offset-2 hover:outline-coklat"
+              ? "w-full h-full flex justify-center items-center col-span-1"
               : "hidden"
           }
         >
-          <div
-            className={
-              currentPath === "/masuk"
-                ? "h-full w-full flex justify-center items-center"
-                : "hidden"
-            }
+          <Link
+            href="/koleksi"
+            className="h-[40px] w-[100px] px-2 py-[4px] bg-orange rounded-lg hover:outline hover:outline-2 hover:outline-offset-1 hover:outline-coklat"
           >
-            <p className="text-krem1 font-inter font-semibold text-xl">
-              Koleksi
-            </p>
-          </div>
-        </Link>
+            <div className="h-full w-full flex justify-center items-center">
+              <p className="text-krem1 font-inter font-medium text-lg">
+                Koleksi
+              </p>
+            </div>
+          </Link>
+        </div>
 
-        <Link
-          href="/masuk"
+        <div
           className={
             currentPath === "/koleksi"
-              ? "col-span-1 h-full w-full px-2 py-[4px] bg-coklat rounded-full hover:outline hover:outline-4 hover:outline-offset-2 hover:outline-coklat"
+              ? "w-full h-full flex justify-center items-center col-span-1"
               : "hidden"
           }
         >
-          <div
-            className={
-              currentPath == "/koleksi"
-                ? "h-full w-full flex justify-center items-center"
-                : "hidden"
-            }
+          <Link
+            href="/masuk"
+            className="h-[40px] w-[100px] px-2 py-[4px] bg-orange rounded-lg hover:outline hover:outline-2 hover:outline-offset-1 hover:outline-coklat"
           >
-            <p className="text-krem1 font-inter font-semibold text-xl">
-              Masukan
-            </p>
-          </div>
-        </Link>
+            <div className="h-full w-full flex justify-center items-center">
+              <p className="text-krem1 font-inter font-medium text-lg">
+                Masukan
+              </p>
+            </div>
+          </Link>
+        </div>
       </div>
 
       <div className="lg:hidden flex flex-row justify-center items-center">

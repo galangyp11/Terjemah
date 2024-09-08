@@ -86,7 +86,7 @@ export default function Koleksi() {
     const onSearchItem = async () => {
       const response = await axios.get(`${routes}/kata/${cariKata}`);
       setDataCariKata(response.data);
-
+      console.log("wdadaw", response.data);
       const groupAbjad = response.data.reduce((i: any, e: any) => {
         let group = e.indonesia[0];
         if (!i[group]) i[group] = { group, kataGroup: [e] };
@@ -100,6 +100,8 @@ export default function Koleksi() {
     };
     onSearchItem();
 
+    setIsLoading(true);
+
     setTimeout(() => {
       setIsLoading(false);
     }, 3000);
@@ -111,9 +113,9 @@ export default function Koleksi() {
   };
 
   // console.log("cari", cariKata);
-  console.log("data cari", dataCariKata);
+  // console.log("data cari", dataCariKata);
   // console.log("dataKata", dataKata);
-  console.log("dataKataGroup", dataKataGroup);
+  // console.log("dataKataGroup", dataKataGroup);
 
   return (
     <div className="w-full h-[700px] lg:container">
@@ -159,7 +161,7 @@ export default function Koleksi() {
                 </p>
               ) : (
                 <p className="text-coklat font-alata text-2xl font-medium">
-                  CINYOSOG
+                  BEKASI
                 </p>
               )}
             </div>
@@ -168,7 +170,7 @@ export default function Koleksi() {
               <div className="absolute -mt-1 -ml-1 active:mt-0 active:ml-0 bg-krem1 text-coklat rounded-lg">
                 {cariKata === "" ? (
                   <div
-                    className="w-[35px] h-[35px] flex justify-center items-center cursor-pointer bg-[#F6995C] text-krem1 rounded-lg"
+                    className="w-[35px] h-[35px] flex justify-center items-center cursor-pointer bg-orange text-krem1 rounded-lg"
                     onClick={handleSort}
                   >
                     <TbArrowsExchange size={30} />
@@ -188,7 +190,7 @@ export default function Koleksi() {
             <div className="col-span-3 flex justify-center items-center rounded-lg">
               {isSortIndonesia ? (
                 <p className="text-coklat font-alata text-2xl font-medium">
-                  CINYOSOG
+                  BEKASI
                 </p>
               ) : (
                 <p className="text-coklat font-alata text-2xl font-medium">
@@ -200,15 +202,33 @@ export default function Koleksi() {
 
           <div className="w-full h-[432px]">
             {dataKataGroup.length === 0 ? (
-              <div className="w-full h-full flex justify-center items-center gap-4 -mt-12">
-                <p className="text-coklat text-xl font-alata font-medium">
-                  Memuat kata
-                </p>
-                <SyncLoader size={10} color="#674636" />
+              <div className="w-full h-full flex justify-center items-center -mt-12">
+                {cariKata === "" ? (
+                  <div className="w-full flex justify-center items-center gap-4">
+                    <p className="text-coklat text-xl font-alata font-medium">
+                      Memuat kata
+                    </p>
+                    <SyncLoader size={10} color="#674636" />
+                  </div>
+                ) : isLoading ? (
+                  <div className="w-full flex justify-center items-center gap-4">
+                    <p className="text-coklat text-xl font-alata font-medium">
+                      Mencari kata ada
+                    </p>
+                    <SyncLoader size={10} color="#674636" />
+                  </div>
+                ) : (
+                  <div className="w-full h-full flex justify-center items-center gap-4">
+                    <p className="text-coklat text-xl font-alata font-medium">
+                      Kata yang kamu cari tidak ada
+                    </p>
+                    <FaRegSadCry size={30} color="#674636" />
+                  </div>
+                )}
               </div>
             ) : (
               <div className="w-full h-[432px]">
-                {cariKata === "" && isLoading === false ? (
+                {cariKata === "" ? (
                   <div className=" bg-krem1 max-h-full overflow-y-auto rounded-lg scrollbar-thin scrollbar-thumb-coklat scrollbar-track-krem2">
                     {isSortIndonesia
                       ? dataKataGroup?.map((data, i) => {
@@ -232,23 +252,7 @@ export default function Koleksi() {
                   </div>
                 ) : (
                   <div className="w-full h-full">
-                    {dataCariKata?.length !== 1 ? (
-                      isLoading ? (
-                        <div className="w-full h-full flex justify-center items-center gap-4">
-                          <p className="text-coklat text-xl font-alata font-medium">
-                            Mencari kata
-                          </p>
-                          <SyncLoader size={10} color="#674636" />
-                        </div>
-                      ) : (
-                        <div className="w-full h-full flex justify-center items-center gap-4">
-                          <p className="text-coklat text-xl font-alata font-medium">
-                            Kata yang kamu cari tidak ada
-                          </p>
-                          <FaRegSadCry size={30} color="#674636" />
-                        </div>
-                      )
-                    ) : (
+                    {dataCariKata?.length !== 0 ? (
                       <div className="w-full h-full">
                         <div className="w-full grid grid-cols-2 h-12 border-b-4 border-krem2 bg-krem1 px-6 hover:brightness-95">
                           <div className="col-span-1 h-full w-full flex items-center">
@@ -257,16 +261,40 @@ export default function Koleksi() {
                             </p>
                           </div>
                         </div>
-                        <div className="flex justify-center items-center w-full">
-                          <div className="min-h-10 h-auto max-h-16 lg:w-full w-[300px] bg-krem1 grid grid-cols-2 font-alata text-coklat font-medium text-base">
-                            <div className="col-span-1 w-full h-full flex justify-center items-center border border-krem2 lg:px-28 px-4">
-                              <p>{dataCariKata[0]?.indonesia}</p>
-                            </div>
-                            <div className="col-span-1 w-full h-full flex justify-center items-center border border-krem2 lg:px-28 px-4">
-                              <p>{dataCariKata[0]?.sunda}</p>
-                            </div>
-                          </div>
+                        <div className="flex flex-col justify-center items-center w-full">
+                          {dataKataGroup[0]?.kataGroup?.map((item: any) => {
+                            return (
+                              <div
+                                key={item.index}
+                                className="min-h-10 h-auto max-h-16 lg:w-full w-[300px] bg-krem1 grid grid-cols-2 font-alata text-coklat font-medium text-base"
+                              >
+                                <div className="col-span-1 w-full h-full flex justify-center items-center border border-krem2 lg:px-28 px-4">
+                                  <p className="font-semibold">
+                                    {item?.indonesia}
+                                  </p>
+                                </div>
+                                <div className="col-span-1 w-full h-full flex justify-center items-center border border-krem2 px-28">
+                                  <p className="font-semibold">{item?.sunda}</p>
+                                </div>
+                              </div>
+                            );
+                          })}
                         </div>
+                      </div>
+                    ) : (
+                      // isLoading ? (
+                      //   <div className="w-full h-full flex justify-center items-center gap-4">
+                      //     <p className="text-coklat text-xl font-alata font-medium">
+                      //       Mencari kata
+                      //     </p>
+                      //     <SyncLoader size={10} color="#674636" />
+                      //   </div>
+                      // ) :
+                      <div className="w-full h-full flex justify-center items-center gap-4">
+                        <p className="text-coklat text-xl font-alata font-medium">
+                          Kata yang kamu cari tidak ada
+                        </p>
+                        <FaRegSadCry size={30} color="#674636" />
                       </div>
                     )}
                   </div>

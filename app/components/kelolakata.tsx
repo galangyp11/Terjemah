@@ -59,7 +59,7 @@ export default function Kelolakata({ setIsMenu }: Props) {
     const onSearchItem = async () => {
       const response = await axios.get(`${routes}/kata/${cariKata}`);
       setDataCariKata(response.data);
-      console.log("data", response.data);
+      console.log("dataCari", response.data);
     };
     onSearchItem();
 
@@ -121,7 +121,7 @@ export default function Kelolakata({ setIsMenu }: Props) {
                       Indonesia
                     </th>
                     <th className="border border-gray-200 bg-gray-200 lg:w-auto w-[100px]">
-                      Cinyosog
+                      Bekasi
                     </th>
                     <th className="border border-gray-200 bg-gray-200 lg:w-auto w-[100px]">
                       Aksi
@@ -172,32 +172,44 @@ export default function Kelolakata({ setIsMenu }: Props) {
                 </div>
               ) : (
                 <div className="my-2 h-[420px]">
-                  <table className="w-full table-fixed">
-                    <tbody>
-                      <tr
-                        key={dataCariKata[0]?.index}
-                        className="bg-gray-50 h-8"
-                      >
-                        <td className="text-center w-12 border border-gray-200 h-8">
-                          1
-                        </td>
-                        <td className="px-4 border border-gray-200">
-                          {dataCariKata[0]?.indonesia}
-                        </td>
-                        <td className="px-4 border border-gray-200">
-                          {dataCariKata[0]?.sunda}
-                        </td>
-                        <td className="h-8 flex items-center justify-center gap-4 border border-gray-200">
-                          <div className=" bg-yellow-400 cursor-pointer hover:brightness-95 px-2 rounded-lg text-black">
-                            Ubah
-                          </div>
-                          <div className="rounded-lg bg-red-600 px-2 text-white cursor-pointer hover:brightness-95">
-                            Hapus
-                          </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                  {dataCariKata.length === 0 ? (
+                    <table className="w-full table-fixed">
+                      <tbody>
+                        <tr className="bg-gray-50 h-8">
+                          <td className="text-center w-12 border border-gray-200 h-8 col-span-5">
+                            Data Kata tidak ada
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  ) : (
+                    <table className="w-full table-fixed">
+                      <tbody>
+                        <tr
+                          key={dataCariKata[0]?.index}
+                          className="bg-gray-50 h-8"
+                        >
+                          <td className="text-center w-12 border border-gray-200 h-8">
+                            1
+                          </td>
+                          <td className="px-4 border border-gray-200">
+                            {dataCariKata[0]?.indonesia}
+                          </td>
+                          <td className="px-4 border border-gray-200">
+                            {dataCariKata[0]?.sunda}
+                          </td>
+                          <td className="h-8 flex items-center justify-center gap-4 border border-gray-200">
+                            <div className=" bg-yellow-400 cursor-pointer hover:brightness-95 px-2 rounded-lg text-black">
+                              Ubah
+                            </div>
+                            <div className="rounded-lg bg-red-600 px-2 text-white cursor-pointer hover:brightness-95">
+                              Hapus
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  )}
                 </div>
               )}
             </div>

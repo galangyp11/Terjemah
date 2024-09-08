@@ -78,22 +78,31 @@ export default function Page() {
         <div className="w-full flex justify-center">
           <p className="text-black text-3xl font-inter font-semibold">Admin</p>
         </div>
-        <div className="w-full cursor-pointer border-b-2 hover:border-black border-gray-200 mt-6 flex items-center gap-4">
+        <div
+          className="w-full cursor-pointer border-b-2 hover:border-black border-gray-200 mt-6 flex items-center gap-4"
+          onClick={handlePilihMenuAdmin}
+        >
           <IoMdPerson color="black" size={30} />
           <p className="text-black text-xl font-inter font-medium">
             Kelola Admin
           </p>
         </div>
-        <div className="w-full cursor-pointer border-b-2 hover:border-black border-gray-200 mt-6 flex items-center gap-4">
+        <div
+          className="w-full cursor-pointer border-b-2 hover:border-black border-gray-200 mt-6 flex items-center gap-4"
+          onClick={handlePilihMenuKata}
+        >
           <TiSortAlphabetically color="black" size={30} />
           <p className="text-black text-xl font-inter font-medium ">
             Kelola Kata
           </p>
         </div>
-        <div className="w-full cursor-pointer border-b-2 hover:border-black border-gray-200 mt-6 flex items-center gap-4">
+        <div
+          className="w-full cursor-pointer border-b-2 hover:border-black border-gray-200 mt-6 flex items-center gap-4"
+          onClick={handlePilihMenuKode}
+        >
           <PiKey color="black" size={30} />
           <p className="text-black text-xl font-inter font-medium ">
-            Kelola Admin
+            Kode Aksess
           </p>
         </div>
       </div>

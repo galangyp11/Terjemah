@@ -46,7 +46,7 @@ export default function Groupkata({ data, isSortIndonesia }: Props) {
             sukuKataInd.push(item?.indonesia);
             sukuKataSund.push(item?.sunda);
 
-            console.log("skij", sukuKataInd);
+            // console.log("skij", sukuKataInd);
             return isSortIndonesia ? (
               <div
                 key={item.index}

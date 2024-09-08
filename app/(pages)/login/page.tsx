@@ -61,6 +61,10 @@ export default function Home() {
     }
   };
 
+  const handleBeranda = () => {
+    router.push("/");
+  };
+
   return (
     <main className="h-screen bg-gray-100 w-full">
       <div className="w-full h-[600px] flex justify-center items-center">
@@ -123,7 +127,7 @@ export default function Home() {
 
             <div className="flex justify-center my-4">
               <button
-                className="bg-black rounded-full w-[250px] h-8"
+                className="bg-biru3 rounded-full w-[250px] h-8 font-semibold"
                 onClick={handleLogin}
               >
                 Login
@@ -131,7 +135,10 @@ export default function Home() {
             </div>
 
             <div className="flex justify-center my-4">
-              <button className="bg-white text-black border-2 border-black rounded-full w-[250px] h-8">
+              <button
+                className="bg-white text-black border-2 border-black rounded-full w-[250px] h-8 font-semibold"
+                onClick={handleBeranda}
+              >
                 Beranda
               </button>
             </div>
@@ -139,7 +146,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="w-full h-12 absolute bottom-0 bg-biru">
+      <div className="w-full h-12 absolute bottom-0 bg-biru3">
         <div className="w-full h-full flex justify-center items-center gap-6">
           <p className="text-white font-inter font-normal lg:text-lg text-md">
             Terjemah

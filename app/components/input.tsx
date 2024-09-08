@@ -99,7 +99,7 @@ export default function Input() {
 
         <div className="col-span-1  lg:px-0 px-4">
           <p className="font-alata font-medium text-coklat lg:text-3xl text-xl text-center mb-6">
-            Bahasa Cinyosog
+            Bahasa Bekasi
           </p>
           <div className="flex justify-center items-center">
             <input
