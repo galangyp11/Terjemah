@@ -204,16 +204,24 @@ export default function Koleksi() {
             {dataKataGroup.length === 0 ? (
               <div className="w-full h-full flex justify-center items-center -mt-12">
                 {cariKata === "" ? (
-                  <div className="w-full flex justify-center items-center gap-4">
-                    <p className="text-coklat text-xl font-alata font-medium">
-                      Memuat kata
-                    </p>
-                    <SyncLoader size={10} color="#674636" />
-                  </div>
+                  dataKata.length === 0 ? (
+                    <div className="w-full flex justify-center items-center gap-4">
+                      <p className="text-coklat text-xl font-alata font-medium">
+                        Data Kata Kosong
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="w-full flex justify-center items-center gap-4">
+                      <p className="text-coklat text-xl font-alata font-medium">
+                        Memuat kata
+                      </p>
+                      <SyncLoader size={10} color="#674636" />
+                    </div>
+                  )
                 ) : isLoading ? (
                   <div className="w-full flex justify-center items-center gap-4">
                     <p className="text-coklat text-xl font-alata font-medium">
-                      Mencari kata ada
+                      Mencari kata
                     </p>
                     <SyncLoader size={10} color="#674636" />
                   </div>

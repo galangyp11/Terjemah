@@ -68,6 +68,14 @@ export default function Kelolakata({ setIsMenu }: Props) {
     }, 3000);
   }, [cariKata]);
 
+  const handleDeleteAll = async (e: any) => {
+    e.preventDefault();
+
+    await axios.delete(`${routes}/kata`);
+    // const dataFillter = dataKata.filter((data: any) => data._id !== id);
+    setDataKata([]);
+  };
+
   return (
     <div className="w-full">
       <div className="w-full grid grid-cols-5 lg:gap-0 gap-6">
@@ -158,12 +166,19 @@ export default function Kelolakata({ setIsMenu }: Props) {
                     <tfoot>
                       <tr>
                         <th className="bg-gray-200">Total Kata</th>
-                        <td className="bg-gray-200 px-4 w-[50px]">90</td>
+                        <td className="bg-gray-200 px-4 w-[50px]">
+                          {dataKata.length}
+                        </td>
                         <td className="bg-gray-200 flex justify-center items-center py-1">
                           <div className="w-full h-12 px-4 py-1 flex justify-center items-center">
-                            <div className="rounded-lg flex justify-center items-center bg-red-600 text-white text-xs cursor-pointer hover:brightness-95 h-8 w-[200px]">
-                              Hapus semua
-                            </div>
+                            {dataKata.length === 0 ? null : (
+                              <div
+                                className="rounded-lg flex justify-center items-center bg-red-600 text-white text-xs cursor-pointer hover:brightness-95 h-8 w-[200px]"
+                                onClick={handleDeleteAll}
+                              >
+                                Hapus semua
+                              </div>
+                            )}
                           </div>
                         </td>
                       </tr>
@@ -172,7 +187,7 @@ export default function Kelolakata({ setIsMenu }: Props) {
                 </div>
               ) : (
                 <div className="my-2 h-[420px]">
-                  {dataCariKata.length === 0 ? (
+                  {dataCariKata.length === 0 || dataKata.length === 0 ? (
                     <table className="w-full table-fixed">
                       <tbody>
                         <tr className="bg-gray-50 h-8">
