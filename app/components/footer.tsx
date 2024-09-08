@@ -115,18 +115,29 @@ export default function Footer() {
               Sosial Media
             </p>
             <div className="py-2 flex flex-col gap-1">
-              <div className="flex items-center gap-2 cursor-pointer">
-                <div className="bg-krem2 w-8 h-8 rounded-full flex justify-center items-center">
-                  <AiFillInstagram color="#674636" size={25} />
+              <Link
+                target="_blank"
+                href={"https://www.instagram.com/sdberkarakteralbiruni/"}
+              >
+                <div className="flex items-center gap-2 cursor-pointer">
+                  <div className="bg-krem2 w-8 h-8 rounded-full flex justify-center items-center">
+                    <AiFillInstagram color="#674636" size={25} />
+                  </div>
+                  <p className="text-krem1">SDBERKARAKTERALBIRUNI</p>
                 </div>
-                <p className="text-krem1">SDBERKARAKTERALBIRUNI</p>
-              </div>
-              <div className="flex items-center gap-2 cursor-pointer">
-                <div className="bg-krem2 w-8 h-8 rounded-full flex justify-center items-center">
-                  <FaYoutube color="#674636" size={23} />
+              </Link>
+
+              <Link
+                target="_blank"
+                href={"https://www.youtube.com/@sdberkarakteralbiruni1135"}
+              >
+                <div className="flex items-center gap-2 cursor-pointer">
+                  <div className="bg-krem2 w-8 h-8 rounded-full flex justify-center items-center">
+                    <FaYoutube color="#674636" size={23} />
+                  </div>
+                  <p className="text-krem1">SDBERKARAKTERALBIRUNI</p>
                 </div>
-                <p className="text-krem1">SDBERKARAKTERALBIRUNI</p>
-              </div>
+              </Link>
             </div>
           </div>
         </div>
