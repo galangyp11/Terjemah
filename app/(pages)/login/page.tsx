@@ -127,7 +127,7 @@ export default function Home() {
 
             <div className="flex justify-center my-4">
               <button
-                className="bg-biru3 rounded-full w-[250px] h-8 font-semibold"
+                className="bg-biru3 rounded-full w-[250px] h-8 font-semibold text-white"
                 onClick={handleLogin}
               >
                 Login

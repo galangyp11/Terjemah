@@ -69,8 +69,8 @@ export default function Input() {
     onSearchItem();
   }, [inputKata.indonesia, inputKata.sunda]);
 
-  console.log("cariKata", dataCariKata);
-  console.log("input", inputKata);
+  // console.log("cariKata", dataCariKata);
+  // console.log("input", inputKata);
 
   return (
     <div className="w-full h-[600px] py-12 lg:container">
@@ -82,7 +82,7 @@ export default function Input() {
 
       <div className="grid grid-cols-2 w-full h-[300px] justify-center items-center">
         <div className="col-span-1 lg:px-0 px-4">
-          <p className="font-alata font-medium text-coklat lg:text-3xl text-xl text-center mb-6">
+          <p className="font-alata font-medium text-coklat lg:text-3xl text-lg text-center mb-6">
             Bahasa Indonesia
           </p>
           <div className="flex justify-center items-center">
@@ -98,7 +98,7 @@ export default function Input() {
         </div>
 
         <div className="col-span-1  lg:px-0 px-4">
-          <p className="font-alata font-medium text-coklat lg:text-3xl text-xl text-center mb-6">
+          <p className="font-alata font-medium text-coklat lg:text-3xl text-lg text-center mb-6">
             Bahasa Bekasi
           </p>
           <div className="flex justify-center items-center">
@@ -165,7 +165,10 @@ export default function Input() {
 
         <div className="col-span-1">
           <div className="absolute -mt-1 -ml-1 active:mt-0 active:ml-0">
-            <div className="w-[200px] h-[50px] bg-[#DF6A6A] rounded-full flex justify-center items-center cursor-pointer ">
+            <div
+              className="w-[200px] h-[50px] bg-[#DF6A6A] rounded-full flex justify-center items-center cursor-pointer "
+              onClick={handleHapusCariKata}
+            >
               <p className="text-krem1 font-alata font-medium text-2xl">
                 Batal
               </p>

@@ -25,20 +25,20 @@ export default function Footer() {
           </div>
           <div className="w-[400px] h-[160px] bg-krem2 rounded-lg">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d7930.859159586726!2d107.02025029847243!3d-6.338364826900181!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sid!2sid!4v1725795293560!5m2!1sid!2sid"
-              width="400"
-              height="200"
-              loading="lazy"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.4370665223337!2d107.02159505650519!3d-6.337390899847846!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69916d0723255d%3A0x2b88291920d368f0!2sSD%20Berkarakter%20Al-Biruni!5e0!3m2!1sid!2sid!4v1725891379516!5m2!1sid!2sid"
+              // width="400"
+              // height="300"
+              // style="border:0;"
               // allowfullscreen=""
-              // draggable="true"
+              loading="lazy"
               // referrerpolicy="no-referrer-when-downgrade"
-              className="border-0 rounded-lg"
+              className="w-[400px] h-[200px] rounded-lg"
             ></iframe>
           </div>
 
           <div className="w-full h-auto flex-1 mb-4 flex justify-start items-end">
-            <Link href="/login" className="w-[300px]">
-              <div className="w-[300px] h-[40px] flex justify-center items-center hover:brightness-90 bg-krem2 rounded-lg">
+            <Link href="/login" className="w-[400px]">
+              <div className="w-[400px] h-[40px] flex justify-center items-center hover:brightness-90 bg-krem2 rounded-lg">
                 <p className="text-coklat font-semibold">Admin</p>
               </div>
             </Link>
@@ -79,7 +79,7 @@ export default function Footer() {
                 <div className="bg-krem2 w-8 h-8 rounded-full flex justify-center items-center">
                   <BsTelephoneFill color="#674636" size={18} />
                 </div>
-                <p className="text-krem1">Telp</p>
+                <p className="text-krem1">085813655107</p>
               </div>
               <div className="flex items-center gap-2">
                 <div className="bg-krem2 w-8 h-8 rounded-full flex justify-center items-center">
@@ -160,7 +160,7 @@ export default function Footer() {
               <div className="bg-krem2 w-8 h-8 rounded-full flex justify-center items-center">
                 <BsTelephoneFill color="#674636" size={18} />
               </div>
-              <p className="text-krem1">Telp</p>
+              <p className="text-krem1">085813655107</p>
             </div>
             <div className="flex items-center gap-2">
               <div className="bg-krem2 w-8 h-8 rounded-full flex justify-center items-center">
@@ -204,8 +204,7 @@ export default function Footer() {
 
         <div className="w-full h-auto bg-krem2 rounded-lg">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d7930.859159586726!2d107.02025029847243!3d-6.338364826900181!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sid!2sid!4v1725795293560!5m2!1sid!2sid"
-            loading="lazy"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.4370665223337!2d107.02159505650519!3d-6.337390899847846!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69916d0723255d%3A0x2b88291920d368f0!2sSD%20Berkarakter%20Al-Biruni!5e0!3m2!1sid!2sid!4v1725891379516!5m2!1sid!2sid"
             // allowfullscreen=""
             // draggable="true"
             // referrerpolicy="no-referrer-when-downgrade"
