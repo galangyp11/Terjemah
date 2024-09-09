@@ -4,6 +4,8 @@ import React, { useState, Dispatch, SetStateAction, useEffect } from "react";
 import { IoCaretBack } from "react-icons/io5";
 import axios from "axios";
 import { routes } from "../api/routes";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface Props {
   setIsMenu: Dispatch<SetStateAction<boolean>>;
@@ -17,11 +19,14 @@ export default function Kelolaadmin({ setIsMenu }: Props) {
   });
   const [dataAdmin, setDataAdmin] = useState<any[]>([]);
 
+  const notifySukses = (pesan: any) => toast.success(pesan);
+  const notifyGagal = (pesan: any) => toast.error(pesan);
+
   useEffect(() => {
     const getData = async () => {
       const response = await axios.get(`${routes}/admin`);
       setDataAdmin(response?.data);
-      console.log("wedwdwd", response.data);
+      // console.log("wedwdwd", response.data);
     };
     getData();
   }, [isUbah, inputAdmin]);
@@ -39,16 +44,27 @@ export default function Kelolaadmin({ setIsMenu }: Props) {
     e.preventDefault();
 
     if (inputAdmin.username === "") {
-      alert("Username baru tidak boleh kosong");
+      notifyGagal("Username baru tidak boleh kosong!");
     } else if (inputAdmin.password === "") {
-      alert("Password baru tidak boleh kosong");
+      notifyGagal("Password baru tidak boleh kosong!");
     } else {
+      notifySukses("Data berhasil diubah!");
       await axios.put(`${routes}/admin/66d583446827d0ae2c03f5df`, inputAdmin);
       setIsUbah(false);
+      setIsMenu(false);
     }
   };
   return (
     <div className="w-full">
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        theme="light"
+      />
       <div className="w-full grid grid-cols-5 lg:gap-0 gap-6">
         <div className="lg:col-span-1 col-span-5 flex items-center">
           <div

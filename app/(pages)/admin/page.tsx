@@ -22,12 +22,22 @@ export default function Page() {
   const [menu, setMenu] = useState<any>();
   const [dataKode, setDataKode] = useState<any[]>([]);
   const [isMenu, setIsMenu] = useState<boolean>(false);
+  const [dataAdmin, setDataAdmin] = useState<any[]>([]);
 
   useEffect(() => {
     if (!cookie) {
       redirect("/");
     }
   }, []);
+
+  useEffect(() => {
+    const getData = async () => {
+      const response = await axios.get(`${routes}/admin`);
+      setDataAdmin(response?.data);
+      // console.log("wedwdwd", response.data);
+    };
+    getData();
+  }, [isMenu]);
 
   const handlePilihMenuKode = (e: any) => {
     e.preventDefault();
@@ -69,14 +79,18 @@ export default function Page() {
     return null;
   }
 
+  console.log("dataadmin", dataAdmin);
+
   return (
     <div className="h-screen w-full grid grid-cols-5">
-      <div className="col-span-1 bg-white h-full p-6 lg:inline hidden">
+      <div className="col-span-1 bg-white h-full p-6 lg:flex hidden flex-col">
         <div className="w-full flex justify-center">
           <IoPersonCircleSharp className="text-[#e5e7eb]" size={150} />
         </div>
         <div className="w-full flex justify-center">
-          <p className="text-black text-3xl font-inter font-semibold">Admin</p>
+          <p className="text-black text-3xl font-inter font-semibold">
+            Halo, {dataAdmin[0]?.username}
+          </p>
         </div>
         <div
           className="w-full cursor-pointer border-b-2 hover:border-black border-gray-200 mt-6 flex items-center gap-4"
@@ -103,6 +117,12 @@ export default function Page() {
           <PiKey color="black" size={30} />
           <p className="text-black text-xl font-inter font-medium ">
             Kode Aksess
+          </p>
+        </div>
+
+        <div className="w-full h-auto flex-1 flex justify-center items-end  ">
+          <p className="text-sm text-black">
+            Copyright &copy; SD Berkarakter Al Biruni
           </p>
         </div>
       </div>

@@ -7,6 +7,8 @@ import { routes } from "../api/routes";
 import { LuSearch } from "react-icons/lu";
 import Fieldkata from "./fieldkata";
 import { MoonLoader } from "react-spinners";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface Props {
   setIsMenu: Dispatch<SetStateAction<boolean>>;
@@ -21,6 +23,9 @@ export default function Kelolakata({ setIsMenu }: Props) {
   const [cariKata, setCariKata] = useState("");
   const [dataCariKata, setDataCariKata] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  const notifySukses = (pesan: any) => toast.success(pesan);
+  const notifyGagal = (pesan: any) => toast.error(pesan);
 
   useEffect(() => {
     const getData = async () => {

@@ -4,6 +4,8 @@ import React, { useState, Dispatch, SetStateAction, useEffect } from "react";
 import { IoCaretBack } from "react-icons/io5";
 import axios from "axios";
 import { routes } from "../api/routes";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface Props {
   setIsMenu: Dispatch<SetStateAction<boolean>>;
@@ -16,6 +18,9 @@ export default function Kodeakses({ setIsMenu }: Props) {
 
   const [dataKode, setDataKode] = useState<any[]>([]);
   const [isUbah, setIsUbah] = useState(false);
+
+  const notifySukses = (pesan: any) => toast.success(pesan);
+  const notifyGagal = (pesan: any) => toast.error(pesan);
 
   useEffect(() => {
     const getKode = async () => {
@@ -34,8 +39,9 @@ export default function Kodeakses({ setIsMenu }: Props) {
     e.preventDefault();
 
     if (kodeAkses.kode === "") {
-      alert("Masukan minimal 1 angka");
+      notifyGagal("Masukan minimal 1 angka");
     } else {
+      notifySukses("Data berhasil diubah!");
       await axios.put(`${routes}/kode/66d5de52b804b267b226c202`, kodeAkses);
 
       setIsUbah(false);
@@ -43,6 +49,15 @@ export default function Kodeakses({ setIsMenu }: Props) {
   };
   return (
     <div className="w-full">
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        theme="light"
+      />
       <div className="w-full grid grid-cols-5 lg:gap-0 gap-6">
         <div className="lg:col-span-1 col-span-5 flex items-center">
           <div
