@@ -56,8 +56,7 @@ export default function Homepage() {
       <div className="lg:grid lg:grid-cols-2">
         <div className="col-span-1 flex flex-col justify-center items-center z-20">
           <div className="grid grid-cols-5">
-            <div className="col-span-1 ">
-              {/* {isDialog ? ( */}
+            <div className="col-span-1">
               <AnimatePresence mode="wait">
                 <motion.div
                   initial={{ opacity: 0, y: 50, scale: 0.3 }}
@@ -70,20 +69,22 @@ export default function Homepage() {
                   className="flex justify-center items-center"
                 >
                   <IoChatboxSharp
-                    className="scale-x-[-1] w-[120px] h-auto z-10"
+                    className="lg:w-[120px] w-[90px] h-auto z-30 mt-24 lg:ml-1 ml-[24px] scale-x-[-1] absolute"
                     color="#F7EED3"
                   />
+
                   <IoChatboxSharp
-                    className="scale-x-[-1] w-[132px] h-auto absolute mt-1 ml-1"
+                    className="lg:w-[134px] w-[104px] h-auto absolute z-20 mt-[100px] lg:ml-2 ml-[28px] scale-x-[-1]"
                     color="#674636"
                   />
-                  <p className="absolute z-20 text-coklat text-lg font-semibold font-alata -mt-6">
-                    Halo, <br />
+
+                  <p className="absolute z-40 text-coklat text-lg font-semibold font-alata mt-[78px] lg:ml-0 ml-8 w-[80px]">
+                    Halo,
+                    <br />
                     aku Albi!
                   </p>
                 </motion.div>
               </AnimatePresence>
-              {/* ) : null} */}
             </div>
 
             <div className="col-span-3 ">
@@ -99,7 +100,7 @@ export default function Homepage() {
                 <Image
                   src={Karakter}
                   alt=""
-                  className="lg:h-[450px] h-[300px] w-auto z-30 relative"
+                  className="lg:h-[450px] h-[300px] w-auto z-10 relative"
                 />
               </motion.div>
               <motion.div
@@ -114,12 +115,12 @@ export default function Homepage() {
                 <Image
                   src={Shadow}
                   alt=""
-                  className="lg:h-[40px] h-[20px] -mt-16 w-auto relative"
+                  className="lg:h-[40px] h-[30px] lg:-mt-16 -mt-11 w-auto relative"
                 />
               </motion.div>
             </div>
 
-            <div className="col-span-1 ">
+            <div className="col-span-1">
               <AnimatePresence mode="wait">
                 <motion.div
                   initial={{ opacity: 0, y: 50, scale: 0.3 }}
@@ -132,14 +133,14 @@ export default function Homepage() {
                   className="flex justify-center items-center"
                 >
                   <IoChatboxSharp
-                    className="w-[120px] h-auto -ml-[80px] z-10"
+                    className="lg:w-[120px] w-[90px] h-auto mt-1 lg:-ml-[80px] -ml-[50px] z-20"
                     color="#F7EED3"
                   />
                   <IoChatboxSharp
-                    className="w-[134px] h-auto -ml-[76px] absolute mt-1"
+                    className="lg:w-[134px] w-[104px] h-auto lg:-ml-[76px] -ml-[46px] absolute mt-2 z-10"
                     color="#674636"
                   />
-                  <p className="absolute z-20 text-coklat text-lg font-semibold font-alata -mt-6 -ml-[80px]">
+                  <p className="absolute z-40 text-coklat text-lg font-semibold font-alata -mt-5 lg:-ml-[80px] -ml-[50px]">
                     Halo, <br />
                     aku Runi!
                   </p>
@@ -162,13 +163,13 @@ export default function Homepage() {
                 }}
               >
                 <div className="absolute -mt-2 -ml-2 active:mt-0 active:ml-0">
-                  <div className="w-[300px] h-[90px] bg-[#F6995C] rounded-full flex justify-center items-center cursor-pointer hover:contrast-125">
+                  <div className="w-[300px] lg:h-[90px] h-[70px] bg-[#F6995C] rounded-full flex justify-center items-center cursor-pointer hover:contrast-125">
                     <p className="text-krem1 font-alata font-medium text-2xl">
                       Masukkan Kata
                     </p>
                   </div>
                 </div>
-                <div className="w-[300px] h-[90px] rounded-full bg-coklat"></div>
+                <div className="w-[300px] lg:h-[90px] h-[70px] rounded-full bg-coklat"></div>
               </motion.div>
             </Link>
 
@@ -183,13 +184,13 @@ export default function Homepage() {
                 }}
               >
                 <div className="absolute -mt-2 -ml-2 active:mt-0 active:ml-0">
-                  <div className="w-[300px] h-[90px] bg-[#F6995C] rounded-full flex justify-center items-center cursor-pointer hover:contrast-125">
+                  <div className="w-[300px] lg:h-[90px] h-[70px] bg-[#F6995C] rounded-full flex justify-center items-center cursor-pointer hover:contrast-125">
                     <p className="text-krem1 font-alata font-medium text-2xl">
                       Koleksi Kata
                     </p>
                   </div>
                 </div>
-                <div className="w-[300px] h-[90px] rounded-full bg-coklat"></div>
+                <div className="w-[300px] lg:h-[90px] h-[70px] rounded-full bg-coklat"></div>
               </motion.div>
             </Link>
           </div>
