@@ -207,15 +207,15 @@ export default function Koleksi() {
                   dataKata.length === 0 ? (
                     <div className="w-full flex justify-center items-center gap-4">
                       <p className="text-coklat text-xl font-alata font-medium">
-                        Data Kata Kosong
+                        Memuat kata
                       </p>
+                      <SyncLoader size={10} color="#674636" />
                     </div>
                   ) : (
                     <div className="w-full flex justify-center items-center gap-4">
                       <p className="text-coklat text-xl font-alata font-medium">
-                        Memuat kata
+                        Data Kata Kosong
                       </p>
-                      <SyncLoader size={10} color="#674636" />
                     </div>
                   )
                 ) : isLoading ? (

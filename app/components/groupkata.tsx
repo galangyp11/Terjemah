@@ -66,11 +66,11 @@ export default function Groupkata({ data, isSortIndonesia }: Props) {
                 key={item.index}
                 className="h-10 w-full bg-krem1 grid grid-cols-2 font-alata text-coklat font-medium text-base"
               >
-                <div className="col-span-1 w-full h-full flex justify-center items-center border border-krem2 px-28">
+                <div className="col-span-1 w-full h-full flex justify-center items-center border border-krem2 lg:px-28 px-4">
                   <p className="font-semibold">{item?.sunda}</p>
                   {/* <p className="">/bu·at·su·ku·ka·ta/</p> */}
                 </div>
-                <div className="col-span-1 w-full h-full flex justify-center items-center border border-krem2 px-28">
+                <div className="col-span-1 w-full h-full flex justify-center items-center border border-krem2 lg:px-28 px-4">
                   <p className="font-semibold">{item?.indonesia}</p>
                   {/* <p className="">/bu·at·su·ku·ka·ta/</p> */}
                 </div>
