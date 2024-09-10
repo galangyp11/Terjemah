@@ -10,6 +10,7 @@ import { routes } from "@/app/api/routes";
 import { motion, AnimatePresence } from "framer-motion";
 import AlertBerhasil from "@/app/components/alert/alertBerhasil";
 import AlertGagal from "@/app/components/alert/alertGagal";
+import AlertTunggu from "@/app/components/alert/alertTunggu";
 
 export default function Home() {
   const cookie = getCookie("akses");
@@ -19,7 +20,9 @@ export default function Home() {
 
   const [isAlertBerhasil, setIsAlertBerhasil] = useState(false);
   const [isAlertGagal, setIsAlertGagal] = useState(false);
+  const [isAlertTunggu, setIsAlertTunggu] = useState(false);
   const [textAlert, setTextAlert] = useState("");
+  const [isDisable, setIsDisable] = useState(true);
 
   useEffect(() => {
     const navigationType = (
@@ -27,7 +30,7 @@ export default function Home() {
         "navigation"
       )[0] as PerformanceNavigationTiming
     ).type;
-    console.log("SDWAD", navigationType);
+    // console.log("SDWAD", navigationType);
 
     if (
       navigationType === "reload" ||
@@ -49,6 +52,14 @@ export default function Home() {
     getDataKode();
   }, []);
 
+  useEffect(() => {
+    if (dataKode.length === 0) {
+      setIsDisable(true);
+    } else {
+      setIsDisable(false);
+    }
+  }, [dataKode]);
+
   const handleInput = (e: any) => {
     e.preventDefault();
     setInputKode((data) => ({ ...data, kode: e.target.value }));
@@ -60,18 +71,15 @@ export default function Home() {
       setIsAkses(true);
       setIsAlertBerhasil(true);
       setTextAlert("Berhasil Masuk!");
+    } else if (dataKode.length === 0) {
+      setIsAlertTunggu(true);
+      setTextAlert("Mohon tunggu");
     } else {
       setIsAlertGagal(true);
       setTextAlert("Kode Salah!");
     }
   };
 
-  // const isPageReload = navigationType === "reload";
-  // const isNavigation = navigationType === "navigate";
-  // const isBackForward = navigationType === "back_forward";
-  // const isPrerender = navigationType === "prerender";
-  // console.log("kode", dataKode);
-  // console.log("input KOde", inputKode);
   return (
     <main className="h-auto bg-krem1 w-full">
       <div className="w-full sticky top-0 z-50">
@@ -107,7 +115,7 @@ export default function Home() {
                 <div className="col-span-1">
                   <div className="absolute -mt-1 -ml-1 active:mt-0 active:ml-0">
                     <div
-                      className="w-[200px] h-[50px] bg-[#99BC85] rounded-full flex justify-center items-center cursor-pointer "
+                      className="w-[200px] h-[50px] bg-[#99BC85] rounded-full flex justify-center items-center cursor-pointer"
                       onClick={handleMasukKode}
                     >
                       <p className="text-krem1 font-alata font-medium text-2xl">
@@ -137,6 +145,13 @@ export default function Home() {
 
       {isAlertGagal ? (
         <AlertGagal setIsAlertGagal={setIsAlertGagal} textAlert={textAlert} />
+      ) : null}
+
+      {isAlertTunggu ? (
+        <AlertTunggu
+          setIsAlertTunggu={setIsAlertTunggu}
+          textAlert={textAlert}
+        />
       ) : null}
     </main>
   );

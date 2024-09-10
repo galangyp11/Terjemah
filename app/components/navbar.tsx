@@ -43,7 +43,7 @@ export default function Navbar() {
         >
           <Link
             href="/"
-            className="h-[40px] w-[100px] px-2 py-[4px] bg-orange rounded-lg hover:outline hover:outline-2 hover:outline-offset-1 hover:outline-coklat"
+            className="h-[40px] w-[100px] px-2 py-[4px] bg-orange rounded-lg hover:outline hover:outline-4 hover:outline-offset-1 hover:outline-coklat"
           >
             <div className="h-full w-full flex justify-center items-center">
               <p className="text-krem1 font-inter font-medium text-lg">
@@ -62,7 +62,7 @@ export default function Navbar() {
         >
           <Link
             href="/koleksi"
-            className="h-[40px] w-[100px] px-2 py-[4px] bg-orange rounded-lg hover:outline hover:outline-2 hover:outline-offset-1 hover:outline-coklat"
+            className="h-[40px] w-[100px] px-2 py-[4px] bg-orange rounded-lg hover:outline hover:outline-4 hover:outline-offset-1 hover:outline-coklat"
           >
             <div className="h-full w-full flex justify-center items-center">
               <p className="text-krem1 font-inter font-medium text-lg">
@@ -81,7 +81,7 @@ export default function Navbar() {
         >
           <Link
             href="/masuk"
-            className="h-[40px] w-[100px] px-2 py-[4px] bg-orange rounded-lg hover:outline hover:outline-2 hover:outline-offset-1 hover:outline-coklat"
+            className="h-[40px] w-[100px] px-2 py-[4px] bg-orange rounded-lg hover:outline hover:outline-4 hover:outline-offset-1 hover:outline-coklat"
           >
             <div className="h-full w-full flex justify-center items-center">
               <p className="text-krem1 font-inter font-medium text-lg">
