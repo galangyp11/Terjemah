@@ -13,6 +13,8 @@ interface Props {
   setIsLoading: Dispatch<SetStateAction<any>>;
   setDataUbah: Dispatch<SetStateAction<any>>;
   setDataKata: Dispatch<SetStateAction<any>>;
+  notifySukses: any;
+  notifyGagal: any;
 }
 
 export default function Fieldkata({
@@ -24,6 +26,8 @@ export default function Fieldkata({
   setIsLoading,
   setDataUbah,
   setDataKata,
+  notifySukses,
+  notifyGagal,
 }: Props) {
   const [isUbah, setIsUbah] = useState(false);
 
@@ -39,18 +43,19 @@ export default function Fieldkata({
 
   const handleSimpan = async (e: any, id: any) => {
     e.preventDefault();
-    console.log("daaubh", dataUbah);
+    // console.log("daaubh", dataUbah);
 
     if (dataUbah.indonesia === "") {
-      alert("kata tidak boleh kosong");
+      notifyGagal("Kata tidak boleh kosong");
     } else if (dataUbah.sunda === "") {
-      alert("kata tidak boleh kosong");
+      notifyGagal("Kata tidak boleh kosong");
     } else {
+      notifySukses("Data berhasil diubah!");
       await axios.put(`${routes}/kata/${id}`, dataUbah);
+      setDataUbah((data: any) => ({ ...data, indonesia: "", sunda: "" }));
       setIsUbah(false);
+      setIsLoading(true);
     }
-
-    setIsLoading(true);
   };
 
   const handleDelete = async (e: any, id: any) => {
@@ -59,6 +64,7 @@ export default function Fieldkata({
     await axios.delete(`${routes}/kata/${id}`);
     const dataFillter = dataKata.filter((data: any) => data._id !== id);
     setDataKata(dataFillter);
+    notifySukses("Data berhasil dihapus!");
   };
   return (
     <tr className={index % 2 === 0 ? "bg-gray-50 h-8" : "bg-gray-100 h-8"}>
@@ -93,13 +99,13 @@ export default function Fieldkata({
       {isUbah ? (
         <td className="lg:h-8 flex lg:flex-row flex-col items-center justify-center lg:gap-4 gap-2 border border-gray-200 lg:w-auto h-[70px] w-[100px]">
           <div
-            className="bg-sky-600 cursor-pointer hover:brightness-95 px-2 rounded-lg text-white font-semibold w-[70px]"
+            className="bg-sky-600 cursor-pointer hover:brightness-95 px-2 rounded-lg text-white font-semibold w-[70px] flex justify-center items-center"
             onClick={(e: any) => handleSimpan(e, data._id)}
           >
             Simpan
           </div>
           <div
-            className="rounded-lg bg-red-600 px-2 text-white cursor-pointer hover:brightness-95 font-semibold w-[70px]"
+            className="rounded-lg bg-red-600 px-2 text-white cursor-pointer hover:brightness-95 font-semibold w-[70px] flex justify-center items-center"
             onClick={handleUbah}
           >
             Batal
@@ -108,13 +114,13 @@ export default function Fieldkata({
       ) : (
         <td className="lg:h-8 flex lg:flex-row flex-col items-center justify-center lg:gap-4 gap-2 border border-gray-200 lg:w-auto h-[70px] w-[100px]">
           <div
-            className=" bg-yellow-400 cursor-pointer hover:brightness-95 px-2 rounded-lg text-white font-semibold w-[70px]"
+            className="flex justify-center items-center bg-yellow-400 cursor-pointer hover:brightness-95 px-2 rounded-lg text-white font-semibold w-[70px]"
             onClick={handleUbah}
           >
             Ubah
           </div>
           <div
-            className="rounded-lg bg-red-600 px-2 text-white cursor-pointer hover:brightness-95 font-semibold w-[70px]"
+            className="rounded-lg bg-red-600 px-2 text-white cursor-pointer hover:brightness-95 font-semibold w-[70px] flex justify-center items-center"
             onClick={(e: any) => handleDelete(e, data._id)}
           >
             Hapus

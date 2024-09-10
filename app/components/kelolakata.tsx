@@ -23,6 +23,7 @@ export default function Kelolakata({ setIsMenu }: Props) {
   const [cariKata, setCariKata] = useState("");
   const [dataCariKata, setDataCariKata] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isHapusSemua, setIsHapusSemua] = useState(false);
 
   const notifySukses = (pesan: any) => toast.success(pesan);
   const notifyGagal = (pesan: any) => toast.error(pesan);
@@ -32,6 +33,10 @@ export default function Kelolakata({ setIsMenu }: Props) {
       const response = await axios.get(`${routes}/kata`);
       if (response?.data?.length === 0) {
         setIsLoading(true);
+
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 2000);
       }
       const sortIndo = response.data.sort((a: any, b: any) => {
         if (a.indonesia > b.indonesia) {
@@ -43,14 +48,10 @@ export default function Kelolakata({ setIsMenu }: Props) {
         return 0;
       });
       setDataKata(sortIndo);
-      console.log("wedwdwd", response.data);
+      // console.log("wedwdwd", response.data);
     };
     getData();
-
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-  }, [isLoading]);
+  }, []);
 
   const handleCariKata = (e: any) => {
     e.preventDefault();
@@ -77,12 +78,27 @@ export default function Kelolakata({ setIsMenu }: Props) {
     e.preventDefault();
 
     await axios.delete(`${routes}/kata`);
+    setIsHapusSemua(false);
+    notifySukses("Data berhasil dihapus!");
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
     // const dataFillter = dataKata.filter((data: any) => data._id !== id);
     setDataKata([]);
   };
 
   return (
     <div className="w-full">
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        theme="light"
+      />
       <div className="w-full grid grid-cols-5 lg:gap-0 gap-6">
         <div className="lg:col-span-1 col-span-5 flex items-center">
           <div
@@ -159,6 +175,8 @@ export default function Kelolakata({ setIsMenu }: Props) {
                           dataKata={dataKata}
                           setIsLoading={setIsLoading}
                           setDataKata={setDataKata}
+                          notifySukses={notifySukses}
+                          notifyGagal={notifyGagal}
                         />
                       );
                     })}
@@ -179,7 +197,7 @@ export default function Kelolakata({ setIsMenu }: Props) {
                             {dataKata.length === 0 ? null : (
                               <div
                                 className="rounded-lg flex justify-center items-center bg-red-600 text-white text-xs cursor-pointer hover:brightness-95 h-8 w-[200px]"
-                                onClick={handleDeleteAll}
+                                onClick={() => setIsHapusSemua(true)}
                               >
                                 Hapus semua
                               </div>
@@ -236,6 +254,38 @@ export default function Kelolakata({ setIsMenu }: Props) {
           )}
         </div>
       </div>
+      {isHapusSemua ? (
+        <div className="absolute z-30 w-full h-full top-0 left-0">
+          <div className="flex w-full h-full justify-center items-center">
+            <div className="z-40 bg-white rounded-lg w-[300px] h-[200px] flex flex-col items-center justify-center">
+              <div className="h-full w-full flex justify-center items-center">
+                <p className="text-black text-lg font-semibold">
+                  Hapus semua kata?
+                </p>
+              </div>
+              <div className="grid grid-cols-2 w-full h-full flex-1">
+                <div className="col-span-1 w-full h-full py-4 pl-4 pr-2">
+                  <div
+                    className="bg-sky-600 rounded-lg w-full h-[40px] flex justify-center items-center lg:cursor-pointer hover:brightness-95"
+                    onClick={handleDeleteAll}
+                  >
+                    Ya
+                  </div>
+                </div>
+                <div className="col-span-1 w-full h-full py-4 pr-4 pl-2">
+                  <div
+                    className="bg-red-600 rounded-lg w-full h-[40px] flex justify-center items-center lg:cursor-pointer hover:brightness-95"
+                    onClick={() => setIsHapusSemua(false)}
+                  >
+                    Batal
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="absolute top-0 left-0 z-30 w-full h-full bg-black opacity-75"></div>
+        </div>
+      ) : null}
     </div>
   );
 }
