@@ -79,13 +79,13 @@ export default function Footer() {
                 <div className="bg-krem2 w-8 h-8 rounded-full flex justify-center items-center">
                   <BsTelephoneFill color="#674636" size={18} />
                 </div>
-                <p className="text-krem1">085813655107</p>
+                <p className="text-krem1">0812-3480-0573</p>
               </div>
               <div className="flex items-center gap-2">
                 <div className="bg-krem2 w-8 h-8 rounded-full flex justify-center items-center">
                   <MdEmail color="#674636" size={23} />
                 </div>
-                <p className="text-krem1">Email</p>
+                <p className="text-krem1">sdberkarakteralbiruni@gmail.com</p>
               </div>
             </div>
           </div>
@@ -160,13 +160,13 @@ export default function Footer() {
               <div className="bg-krem2 w-8 h-8 rounded-full flex justify-center items-center">
                 <BsTelephoneFill color="#674636" size={18} />
               </div>
-              <p className="text-krem1">085813655107</p>
+              <p className="text-krem1">0812-3480-0573</p>
             </div>
             <div className="flex items-center gap-2">
               <div className="bg-krem2 w-8 h-8 rounded-full flex justify-center items-center">
                 <MdEmail color="#674636" size={23} />
               </div>
-              <p className="text-krem1">Email</p>
+              <p className="text-krem1">sdberkarakteralbiruni@gmail.com</p>
             </div>
           </div>
         </div>
