@@ -78,7 +78,7 @@ export default function Homepage() {
                     color="#674636"
                   />
 
-                  <p className="absolute z-40 text-coklat md:text-lg text-base font-semibold font-alata mt-[78px] lg:ml-0 ml-8 w-[80px] md:w-[40px]">
+                  <p className="absolute z-40 text-coklat md:text-lg text-base font-semibold font-alata mt-[78px] lg:ml-0 ml-8 lg:w-[80px] w-[80px] md:w-[40px]">
                     Halo,
                     <br />
                     aku Albi!
@@ -140,7 +140,7 @@ export default function Homepage() {
                     className="lg:w-[134px] w-[104px] md:w-[64px] h-auto lg:-ml-[76px] -ml-[46px] absolute mt-2 z-10"
                     color="#674636"
                   />
-                  <p className="absolute z-40 text-coklat md:text-lg text-base font-semibold font-alata -mt-5 lg:-ml-[80px] -ml-[50px] md:w-[40px]">
+                  <p className="absolute z-40 text-coklat md:text-lg text-base font-semibold font-alata -mt-5 lg:-ml-[80px] -ml-[50px] lg:w-[80px] md:w-[40px]">
                     Halo, <br />
                     aku Runi!
                   </p>
