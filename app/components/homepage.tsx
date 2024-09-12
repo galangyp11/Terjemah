@@ -30,7 +30,7 @@ export default function Homepage() {
           }}
           className=" z-20"
         >
-          <p className="font-mont font-bold text-[#674636] lg:text-8xl text-6xl z-20">
+          <p className="font-mont font-bold text-coklat lg:text-8xl text-6xl z-20">
             KABBAR
           </p>
         </motion.div>
@@ -69,16 +69,16 @@ export default function Homepage() {
                   className="flex justify-center items-center"
                 >
                   <IoChatboxSharp
-                    className="lg:w-[120px] w-[90px] h-auto z-30 mt-24 lg:ml-1 ml-[24px] scale-x-[-1] absolute"
+                    className="lg:w-[120px] w-[90px] md:w-[50px] h-auto z-30 mt-24 lg:ml-1 ml-[24px] scale-x-[-1] absolute"
                     color="#F7EED3"
                   />
 
                   <IoChatboxSharp
-                    className="lg:w-[134px] w-[104px] h-auto absolute z-20 mt-[100px] lg:ml-2 ml-[28px] scale-x-[-1]"
+                    className="lg:w-[134px] w-[104px] md:w-[64px] h-auto absolute z-20 mt-[100px] lg:ml-2 ml-[28px] scale-x-[-1]"
                     color="#674636"
                   />
 
-                  <p className="absolute z-40 text-coklat md:text-lg text-base font-semibold font-alata mt-[78px] lg:ml-0 ml-8 w-[80px]">
+                  <p className="absolute z-40 text-coklat md:text-lg text-base font-semibold font-alata mt-[78px] lg:ml-0 ml-8 w-[80px] md:w-[40px]">
                     Halo,
                     <br />
                     aku Albi!
@@ -133,14 +133,14 @@ export default function Homepage() {
                   className="flex justify-center items-center"
                 >
                   <IoChatboxSharp
-                    className="lg:w-[120px] w-[90px] h-auto mt-1 lg:-ml-[80px] -ml-[50px] z-20"
+                    className="lg:w-[120px] w-[90px] md:w-[50px] h-auto mt-1 lg:-ml-[80px] -ml-[50px] z-20"
                     color="#F7EED3"
                   />
                   <IoChatboxSharp
-                    className="lg:w-[134px] w-[104px] h-auto lg:-ml-[76px] -ml-[46px] absolute mt-2 z-10"
+                    className="lg:w-[134px] w-[104px] md:w-[64px] h-auto lg:-ml-[76px] -ml-[46px] absolute mt-2 z-10"
                     color="#674636"
                   />
-                  <p className="absolute z-40 text-coklat md:text-lg text-base font-semibold font-alata -mt-5 lg:-ml-[80px] -ml-[50px]">
+                  <p className="absolute z-40 text-coklat md:text-lg text-base font-semibold font-alata -mt-5 lg:-ml-[80px] -ml-[50px] md:w-[40px]">
                     Halo, <br />
                     aku Runi!
                   </p>
