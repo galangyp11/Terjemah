@@ -14,7 +14,7 @@ export default function Input() {
     sunda: "",
   });
   const [dataCariKata, setDataCariKata] = useState<any[]>([]);
-
+  const [isDisable, setIsDisable] = useState(false);
   const [isAlertBerhasil, setIsAlertBerhasil] = useState(false);
   const [isAlertGagal, setIsAlertGagal] = useState(false);
   const [textAlert, setTextAlert] = useState("");
@@ -32,6 +32,8 @@ export default function Input() {
   const handleSimpan = async (e: any) => {
     e.preventDefault();
 
+    setIsDisable(true);
+
     if (inputKata.indonesia === "") {
       setIsAlertGagal(true);
       setTextAlert("Kata tidak boleh kosong");
@@ -45,6 +47,9 @@ export default function Input() {
       await axios.post(`${routes}/kata`, inputKata);
       setIsAlertBerhasil(true);
       setTextAlert("Kata berhasil dimasukan");
+      setTimeout(() => {
+        setIsDisable(false);
+      }, 2000);
     }
     setInputKata((data) => ({ ...data, indonesia: "", sunda: "" }));
     //console.log(inputKata);
@@ -133,14 +138,15 @@ export default function Input() {
           <div className="col-span-1">
             <div className="col-span-1">
               <div className="absolute -mt-1 -ml-1 active:mt-0 active:ml-0">
-                <div
-                  className="w-[200px] h-[50px] bg-[#99BC85] rounded-full flex justify-center items-center cursor-pointer "
+                <button
+                  className="w-[200px] h-[50px] bg-[#99BC85] rounded-full flex justify-center items-center cursor-pointer"
                   onClick={handleSimpan}
+                  disabled={isDisable}
                 >
                   <p className="text-krem1 font-alata font-medium text-2xl">
                     Simpan
                   </p>
-                </div>
+                </button>
               </div>
               <div className="w-[200px] h-[50px] rounded-full bg-coklat"></div>
             </div>

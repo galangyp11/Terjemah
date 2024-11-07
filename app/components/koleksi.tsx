@@ -121,7 +121,7 @@ export default function Koleksi() {
     <div className="w-full h-[700px] lg:container">
       <div className="flex justify-center items-center gap-4 mb-6">
         <p className="font-alata font-semibold text-5xl text-coklat">Koleksi</p>
-        <div className="w-[60px] h-[60px] rounded-lg flex justify-center items-center bg-[#F6995C]">
+        <div className="w-fit h-fit py-2 px-4 rounded-lg flex justify-center items-center bg-[#F6995C]">
           <p className="text-krem1 font-alata font-semibold text-4xl">
             {dataKata?.length}
           </p>
@@ -203,21 +203,12 @@ export default function Koleksi() {
           <div className="w-full h-[432px]">
             {dataKataGroup.length === 0 ? (
               <div className="w-full h-full flex justify-center items-center -mt-12">
-                {cariKata === "" ? (
-                  dataKata.length === 0 ? (
-                    <div className="w-full flex justify-center items-center gap-4">
-                      <p className="text-coklat text-xl font-alata font-medium">
-                        Memuat kata
-                      </p>
-                      <SyncLoader size={10} color="#674636" />
-                    </div>
-                  ) : (
-                    <div className="w-full flex justify-center items-center gap-4">
-                      <p className="text-coklat text-xl font-alata font-medium">
-                        Data Kata Kosong
-                      </p>
-                    </div>
-                  )
+                {cariKata === "" && dataKata.length === 0 ? (
+                  <div className="w-full flex justify-center items-center gap-4">
+                    <p className="text-coklat text-xl font-alata font-medium">
+                      Data Kata Kosong
+                    </p>
+                  </div>
                 ) : isLoading ? (
                   <div className="w-full flex justify-center items-center gap-4">
                     <p className="text-coklat text-xl font-alata font-medium">
