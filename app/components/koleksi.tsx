@@ -86,7 +86,7 @@ export default function Koleksi() {
     const onSearchItem = async () => {
       const response = await axios.get(`${routes}/kata/${cariKata}`);
       setDataCariKata(response.data);
-      console.log("wdadaw", response.data);
+      // console.log("wdadaw", response.data);
       const groupAbjad = response.data.reduce((i: any, e: any) => {
         let group = e.indonesia[0];
         if (!i[group]) i[group] = { group, kataGroup: [e] };

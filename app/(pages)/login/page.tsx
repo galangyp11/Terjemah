@@ -33,7 +33,7 @@ export default function Home() {
           password: response.data.password,
         }));
       } catch (error) {
-        console.log("data cek kosong");
+        // console.log("data cek kosong");
       }
     };
     getDataAdmin();

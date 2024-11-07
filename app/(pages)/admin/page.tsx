@@ -79,7 +79,7 @@ export default function Page() {
     return null;
   }
 
-  console.log("dataadmin", dataAdmin);
+  // console.log("dataadmin", dataAdmin);
 
   return (
     <div className="h-screen w-full grid grid-cols-5">

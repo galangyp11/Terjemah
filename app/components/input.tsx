@@ -31,25 +31,25 @@ export default function Input() {
 
   const handleSimpan = async (e: any) => {
     e.preventDefault();
-
     setIsDisable(true);
 
     if (inputKata.indonesia === "") {
       setIsAlertGagal(true);
       setTextAlert("Kata tidak boleh kosong");
+      setIsDisable(false);
     } else if (inputKata.sunda === "") {
       setIsAlertGagal(true);
       setTextAlert("Kata tidak boleh kosong");
+      setIsDisable(false);
     } else if (dataCariKata?.length >= 1) {
       setIsAlertGagal(true);
       setTextAlert("Kata sudah ada di koleksi");
+      setIsDisable(false);
     } else {
       await axios.post(`${routes}/kata`, inputKata);
       setIsAlertBerhasil(true);
       setTextAlert("Kata berhasil dimasukan");
-      setTimeout(() => {
-        setIsDisable(false);
-      }, 2000);
+      setIsDisable(false);
     }
     setInputKata((data) => ({ ...data, indonesia: "", sunda: "" }));
     //console.log(inputKata);
@@ -68,7 +68,7 @@ export default function Input() {
         );
         setDataCariKata(response.data);
       } catch (error) {
-        console.log("data cek kosong");
+        // console.log("data cek kosong");
       }
     };
     onSearchItem();
@@ -139,7 +139,7 @@ export default function Input() {
             <div className="col-span-1">
               <div className="absolute -mt-1 -ml-1 active:mt-0 active:ml-0">
                 <button
-                  className="w-[200px] h-[50px] bg-[#99BC85] rounded-full flex justify-center items-center cursor-pointer"
+                  className="w-[200px] h-[50px] bg-[#99BC85] rounded-full flex justify-center items-center lg:cursor-pointer"
                   onClick={handleSimpan}
                   disabled={isDisable}
                 >
@@ -157,14 +157,15 @@ export default function Input() {
       <div className="w-full flex flex-col items-center justify-center lg:hidden gap-6">
         <div className="col-span-1">
           <div className="absolute -mt-1 -ml-1 active:mt-0 active:ml-0">
-            <div
+            <button
               className="w-[200px] h-[50px] bg-[#99BC85] rounded-full flex justify-center items-center cursor-pointer "
               onClick={handleSimpan}
+              disabled={isDisable}
             >
               <p className="text-krem1 font-alata font-medium text-2xl">
                 Simpan
               </p>
-            </div>
+            </button>
           </div>
           <div className="w-[200px] h-[50px] rounded-full bg-coklat"></div>
         </div>
@@ -172,7 +173,7 @@ export default function Input() {
         <div className="col-span-1">
           <div className="absolute -mt-1 -ml-1 active:mt-0 active:ml-0">
             <div
-              className="w-[200px] h-[50px] bg-[#DF6A6A] rounded-full flex justify-center items-center cursor-pointer "
+              className="w-[200px] h-[50px] bg-[#DF6A6A] rounded-full flex justify-center items-center lg:cursor-pointer "
               onClick={handleHapusCariKata}
             >
               <p className="text-krem1 font-alata font-medium text-2xl">
