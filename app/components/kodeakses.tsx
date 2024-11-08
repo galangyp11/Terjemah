@@ -61,7 +61,7 @@ export default function Kodeakses({ setIsMenu }: Props) {
       <div className="w-full grid grid-cols-5 lg:gap-0 gap-6">
         <div className="lg:col-span-1 col-span-5 flex items-center">
           <div
-            className="bg-white w-[150px] h-[35px] rounded-lg flex items-center justify-center gap-2 cursor-pointer hover:brightness-95 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]"
+            className="bg-white w-[150px] h-[45px] rounded-lg flex items-center justify-center gap-2 cursor-pointer hover:brightness-95 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]"
             onClick={() => {
               setIsMenu(false);
             }}

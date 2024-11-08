@@ -7,9 +7,11 @@ import { PiKey } from "react-icons/pi";
 import { TiSortAlphabetically } from "react-icons/ti";
 import { IoMdPerson } from "react-icons/io";
 import { IoPersonCircleSharp } from "react-icons/io5";
+import { FiUpload } from "react-icons/fi";
 import Kodeakses from "@/app/components/kodeakses";
 import Kelolaadmin from "@/app/components/kelolaadmin";
 import Kelolakata from "@/app/components/kelolakata";
+import Uploadfile from "@/app/components/uploadfile";
 import axios from "axios";
 import { routes } from "@/app/api/routes";
 import { redirect, useRouter } from "next/navigation";
@@ -58,6 +60,13 @@ export default function Page() {
 
     setIsMenu(true);
     setMenu(<Kelolakata setIsMenu={setIsMenu} />);
+  };
+
+  const handlePilihMenuUpload = (e: any) => {
+    e.preventDefault();
+
+    setIsMenu(true);
+    setMenu(<Uploadfile setIsMenu={setIsMenu} />);
   };
 
   const handleLogout = (e: any) => {
@@ -117,6 +126,16 @@ export default function Page() {
           <PiKey color="black" size={30} />
           <p className="text-black text-xl font-inter font-medium ">
             Kode Aksess
+          </p>
+        </div>
+
+        <div
+          className="w-full cursor-pointer border-b-2 hover:border-black border-gray-200 mt-6 flex items-center gap-4"
+          onClick={handlePilihMenuUpload}
+        >
+          <FiUpload color="black" size={30} />
+          <p className="text-black text-xl font-inter font-medium ">
+            Upload Kata
           </p>
         </div>
 
@@ -207,6 +226,22 @@ export default function Page() {
                 </div>
                 <div className="col-span-1 flex items-center">
                   <IoMdPerson className="text-[#e5e7eb]" size={100} />
+                </div>
+              </div>
+
+              <div
+                className="w-full h-[200px] px-12 cursor-pointer hover:brightness-95 grid grid-cols-3 rounded-lg bg-white shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]"
+                onClick={handlePilihMenuUpload}
+              >
+                <div className="col-span-2">
+                  <div className="w-full lg:h-1/2 h-full flex lg:items-end items-center">
+                    <p className="font-inter font-semibold text-2xl text-black">
+                      Upload Kata
+                    </p>
+                  </div>
+                </div>
+                <div className="col-span-1 flex items-center">
+                  <FiUpload className="text-[#e5e7eb]" size={100} />
                 </div>
               </div>
             </div>
