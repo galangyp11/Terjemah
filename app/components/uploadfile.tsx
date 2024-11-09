@@ -15,22 +15,11 @@ interface Props {
 
 export default function Uploadfile({ setIsMenu }: Props) {
   const [file, setFile] = useState<File | null>(null);
-  const [dataJson, setDataJson] = useState([]);
 
   const handleFileChange = (e: any) => {
     if (e.target.files) {
       setFile(e.target.files[0]);
     }
-
-    const formData = new FormData();
-    if (e?.target?.files?.length) {
-      formData.append("image", e?.target?.files[0]);
-    }
-    const postData = async () => {
-      await axios.post(`http://localhost:3011/upload`, formData);
-    };
-
-    postData();
   };
 
   const handleDelete = () => {
@@ -38,21 +27,16 @@ export default function Uploadfile({ setIsMenu }: Props) {
   };
 
   const handleSubmit = async () => {
-    // if (file != null) {
-    //   const reader = new FileReader();
-    //   reader.onload = (e) => {
-    //     const data = e.target.result;
-    //     const workbook = XLSX.read(data, { type: "binary" });
-    //     const sheetName = workbook.SheetNames[0];
-    //     const worksheet = workbook.Sheets[sheetName];
-    //     const json = XLSX.utils.sheet_to_json(worksheet);
-    //     setJsonData(JSON.stringify(json, null, 2));
-    //   };
-    //   reader.readAsBinaryString(file);
-    // }
-    // await axios.post(`http://localhost:3011/filekata`, file);
-    // const formData = new FormData();
-    // formData.append("file", file);
+    let formData = new FormData();
+
+    if (file != null) {
+      formData.append("file", file);
+      const postData = async () => {
+        // await axios.post(`http://localhost:3011/upload`, formData);
+        await axios.post(`${routes}/upload`, formData);
+      };
+      postData();
+    }
   };
 
   console.log("xwx", file);
