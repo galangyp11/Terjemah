@@ -99,10 +99,7 @@ export default function Uploadfile({ setIsMenu }: Props) {
     // }
 
     const postData = async () => {
-      const response = await axios.post(
-        `http://localhost:3011/upload`,
-        dataFile
-      );
+      const response = await axios.post(`${routes}/upload`, dataFile);
       console.log("Server response:", response.data);
 
       notifySukses("Data berhasil dimasukan!");
