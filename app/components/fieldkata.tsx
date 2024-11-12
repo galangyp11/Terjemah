@@ -38,7 +38,11 @@ export default function Fieldkata({
   const handleInput = (e: any) => {
     e.preventDefault();
 
-    setDataUbah((data: any) => ({ ...data, [e.target.id]: e.target.value }));
+    setDataUbah((data: any) => ({
+      ...data,
+      [e.target.id]:
+        e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1),
+    }));
   };
 
   const handleSimpan = async (e: any, id: any) => {
@@ -55,6 +59,9 @@ export default function Fieldkata({
       setDataUbah((data: any) => ({ ...data, indonesia: "", sunda: "" }));
       setIsUbah(false);
       setIsLoading(true);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
     }
   };
 
@@ -68,8 +75,8 @@ export default function Fieldkata({
   };
   return (
     <tr className={index % 2 === 0 ? "bg-gray-50 h-8" : "bg-gray-100 h-8"}>
-      <td className="text-center lg:w-12 border border-gray-200">{no}</td>
-      <td className="px-4 border border-gray-200 lg:w-auto w-[100px]">
+      <td className="text-center w-12 border border-gray-200">{no}</td>
+      <td className="px-4 border border-gray-200 w-full">
         {isUbah ? (
           <input
             placeholder={data.indonesia}
@@ -82,7 +89,7 @@ export default function Fieldkata({
           data.indonesia
         )}
       </td>
-      <td className="px-4 border border-gray-200 lg:w-auto w-[100px]">
+      <td className="px-4 border border-gray-200 w-full">
         {isUbah ? (
           <input
             placeholder={data.sunda}

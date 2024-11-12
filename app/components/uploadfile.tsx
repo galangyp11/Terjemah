@@ -7,6 +7,7 @@ import { TiDeleteOutline } from "react-icons/ti";
 import axios from "axios";
 import { routes } from "../api/routes";
 import * as xlsx from "xlsx";
+import { MoonLoader } from "react-spinners";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -17,10 +18,10 @@ interface Props {
 export default function Uploadfile({ setIsMenu }: Props) {
   const [file, setFile] = useState<File | null>(null);
   const [dataFile, setDataFile] = useState<any>([]);
-  const fileTest = [
-    { ada: "1", idi: "2" },
-    { ada: "1", idi: "2" },
-  ];
+  const [isLoading, setIsLoading] = useState(true);
+
+  const notifySukses = (pesan: any) => toast.success(pesan);
+  const notifyGagal = (pesan: any) => toast.error(pesan);
 
   const handleFileChange = (e: any) => {
     e.preventDefault();
@@ -35,10 +36,21 @@ export default function Uploadfile({ setIsMenu }: Props) {
         const workbook = xlsx.read(data, { type: "array" });
         const sheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[sheetName];
-        const json = xlsx.utils.sheet_to_json(worksheet);
+        const json: any = xlsx.utils.sheet_to_json(worksheet);
+
         console.log("conert", json);
 
-        setDataFile(json);
+        for (let i = 0; i < json?.length; i++) {
+          const kapitalIndonesia =
+            json?.[i].indonesia.charAt(0).toUpperCase() +
+            json?.[i]?.indonesia.slice(1);
+          const kapitalSunda =
+            json?.[i].bekasi.charAt(0).toUpperCase() +
+            json?.[i]?.bekasi.slice(1);
+
+          const datakata = { indonesia: kapitalIndonesia, sunda: kapitalSunda };
+          setDataFile((dataFile: any) => [...dataFile, datakata]);
+        }
       };
       reader.readAsArrayBuffer(e.target.files[0]);
     }
@@ -50,7 +62,7 @@ export default function Uploadfile({ setIsMenu }: Props) {
   };
 
   const handleSubmit = async () => {
-    let formData = new FormData();
+    // let formData = new FormData();
 
     // if (file != null) {
     //   formData.append("file", file);
@@ -66,25 +78,43 @@ export default function Uploadfile({ setIsMenu }: Props) {
     //   postData();
     // }
 
-    if (dataFile.length != 0) {
-      // formData.append("dataJson", dataFile);
-      for (let i = 0; i < dataFile?.indonesia?.length; i++) {
-        formData.append("indonesia", dataFile?.indonesia[i]);
-      }
+    // if (dataFile.length != 0) {
+    // formData.append("dataJson", dataFile);
+    // for (let i = 0; i < dataFile?.indonesia?.length; i++) {
+    //   formData.append("indonesia", dataFile?.indonesia[i]);
+    // }
 
-      for (let i = 0; i < dataFile?.sunda?.length; i++) {
-        formData.append("sunda", dataFile?.sunda[i]);
-      }
+    // for (let i = 0; i < dataFile?.sunda?.length; i++) {
+    //   formData.append("sunda", dataFile?.sunda[i]);
+    // }
+    const dataKata = [];
 
-      const postData = async () => {
-        const response = await axios.post(
-          `http://localhost:3011/upload`,
-          fileTest
-        );
-        console.log("Server response:", response.data);
-      };
-      postData();
-    }
+    // for (let i = 0; i < dataFile?.length; i++) {
+    //   const kapitalIndonesia =
+    //     dataFile?.[i].indonesia.charAt(0).toUpperCase() +
+    //     dataFile?.[i]?.indonesia.slice(1);
+    //   const kapitalSunda =
+    //     dataFile?.[i].sunda.charAt(0).toUpperCase() +
+    //     dataFile?.[i]?.sunda.slice(1);
+    // }
+
+    const postData = async () => {
+      const response = await axios.post(
+        `http://localhost:3011/upload`,
+        dataFile
+      );
+      console.log("Server response:", response.data);
+
+      notifySukses("Data berhasil dimasukan!");
+      setIsLoading(true);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
+      setFile(null);
+      setDataFile([]);
+    };
+    postData();
+    // }
   };
 
   console.log("xwx", dataFile);
@@ -119,7 +149,7 @@ export default function Uploadfile({ setIsMenu }: Props) {
         <div className="lg:col-span-1 hidden"></div>
       </div>
 
-      <div className="w-full h-auto mt-12 px-6 py-6 lg:gap-0 gap-10 bg-white grid grid-cols-10 justify-center items-center rounded-lg shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
+      <div className="w-full h-auto mt-12 px-6 py-6 lg:gap-0 gap-10 bg-white lg:grid lg:grid-cols-10 flex flex-col lg:justify-center lg:items-center rounded-lg shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
         <div className="col-span-2">
           <p className="text-black">Masukan File (xlsx, xls) : </p>
         </div>

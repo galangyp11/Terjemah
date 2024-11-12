@@ -5,6 +5,7 @@ import { IoCaretBack } from "react-icons/io5";
 import axios from "axios";
 import { routes } from "../api/routes";
 import { LuSearch } from "react-icons/lu";
+import { IoMdSwap } from "react-icons/io";
 import Fieldkata from "./fieldkata";
 import { MoonLoader } from "react-spinners";
 import { ToastContainer, toast } from "react-toastify";
@@ -24,34 +25,77 @@ export default function Kelolakata({ setIsMenu }: Props) {
   const [dataCariKata, setDataCariKata] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isHapusSemua, setIsHapusSemua] = useState(false);
+  const [isSortIndonesia, setIsSortIndonesia] = useState(true);
 
   const notifySukses = (pesan: any) => toast.success(pesan);
   const notifyGagal = (pesan: any) => toast.error(pesan);
 
-  useEffect(() => {
-    const getData = async () => {
-      const response = await axios.get(`${routes}/kata`);
-      if (response?.data?.length === 0) {
-        setIsLoading(true);
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     const response = await axios.get(`${routes}/kata`);
+  //     if (response?.data?.length === 0) {
+  //       setIsLoading(true);
 
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 2000);
+  //       setTimeout(() => {
+  //         setIsLoading(false);
+  //       }, 2000);
+  //     }
+  //     const sortIndo = response.data.sort((a: any, b: any) => {
+  //       if (a.indonesia > b.indonesia) {
+  //         return 1;
+  //       }
+  //       if (a.indonesia < b.indonesia) {
+  //         return -1;
+  //       }
+  //       return 0;
+  //     });
+  //     setDataKata(sortIndo);
+  //     // console.log("wedwdwd", response.data);
+  //   };
+  //   getData();
+
+  // }, []);
+
+  useEffect(() => {
+    const getKata = async () => {
+      const response = await axios.get(`${routes}/kata`);
+
+      if (isSortIndonesia === true) {
+        const sortIndo = response.data.sort((a: any, b: any) => {
+          if (a.indonesia > b.indonesia) {
+            return 1;
+          }
+          if (a.indonesia < b.indonesia) {
+            return -1;
+          }
+          return 0;
+        });
+        setDataKata(sortIndo);
+      } else {
+        const sortSunda = response.data.sort((a: any, b: any) => {
+          if (a.sunda > b.sunda) {
+            return 1;
+          }
+          if (a.sunda < b.sunda) {
+            return -1;
+          }
+          return 0;
+        });
+        setDataKata(sortSunda);
       }
-      const sortIndo = response.data.sort((a: any, b: any) => {
-        if (a.indonesia > b.indonesia) {
-          return 1;
-        }
-        if (a.indonesia < b.indonesia) {
-          return -1;
-        }
-        return 0;
-      });
-      setDataKata(sortIndo);
-      // console.log("wedwdwd", response.data);
     };
-    getData();
-  }, []);
+    getKata();
+  }, [isSortIndonesia]);
+
+  const handleSort = (e: any) => {
+    e.preventDefault();
+    setIsSortIndonesia(!isSortIndonesia);
+
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+  };
 
   const handleCariKata = (e: any) => {
     e.preventDefault();
@@ -119,7 +163,7 @@ export default function Kelolakata({ setIsMenu }: Props) {
       </div>
 
       <div className="w-full max-h-[600px] lg:mt-12 mt-6 p-6 text-black bg-white rounded-lg shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
-        <div className="w-full">
+        <div className="w-full flex items-center gap-4">
           <div className="w-64 flex p-2 text-md gap-1 items-center rounded-lg shadow-[0px_0px_1px_1px_#00000024]">
             <LuSearch size={22} />
             <input
@@ -129,6 +173,12 @@ export default function Kelolakata({ setIsMenu }: Props) {
               value={cariKata}
               onChange={handleCariKata}
             />
+          </div>
+          <div
+            className="w-fit h-fit rounded-lg p-1 bg-black lg:cursor-pointer"
+            onClick={handleSort}
+          >
+            <IoMdSwap color="white" size={25} />
           </div>
         </div>
 
@@ -146,13 +196,26 @@ export default function Kelolakata({ setIsMenu }: Props) {
                     <th className="border border-gray-200 bg-gray-200 w-12">
                       No
                     </th>
-                    <th className="border border-gray-200 bg-gray-200 lg:w-auto w-[100px]">
-                      Indonesia
-                    </th>
-                    <th className="border border-gray-200 bg-gray-200 lg:w-auto w-[100px]">
-                      Bekasi
-                    </th>
-                    <th className="border border-gray-200 bg-gray-200 lg:w-auto w-[100px]">
+                    {isSortIndonesia ? (
+                      <th className="border border-gray-200 bg-gray-200 w-full grid grid-cols-2">
+                        <div className="col-span-1 flex items-center justify-center">
+                          Indonesia
+                        </div>
+                        <div className="col-span-1 flex items-center justify-center">
+                          Bekasi
+                        </div>
+                      </th>
+                    ) : (
+                      <th className="border border-gray-200 bg-gray-200 w-full grid grid-cols-2">
+                        <div className="col-span-1 flex items-center justify-center">
+                          Bekasi
+                        </div>
+                        <div className="col-span-1 flex items-center justify-center">
+                          Indonesia
+                        </div>
+                      </th>
+                    )}
+                    <th className="border border-gray-200 bg-gray-200 lg:w-20 w-14">
                       Aksi
                     </th>
                   </tr>
@@ -209,7 +272,7 @@ export default function Kelolakata({ setIsMenu }: Props) {
                   </table>
                 </div>
               ) : (
-                <div className="my-2 h-[420px]">
+                <div className="my-2 h-[420px] overflow-clip flex flex-col">
                   {dataCariKata.length === 0 || dataKata.length === 0 ? (
                     <table className="w-full table-fixed">
                       <tbody>
@@ -221,9 +284,29 @@ export default function Kelolakata({ setIsMenu }: Props) {
                       </tbody>
                     </table>
                   ) : (
-                    <table className="w-full table-fixed">
-                      <tbody>
-                        <tr
+                    <div className="flex-1 overflow-y-auto">
+                      <table className="w-full table-fixed">
+                        <tbody>
+                          {dataCariKata?.map((data, index) => {
+                            const no = index + 1;
+
+                            return (
+                              <Fieldkata
+                                key={data.index}
+                                no={no}
+                                index={index}
+                                data={data}
+                                dataUbah={dataUbah}
+                                setDataUbah={setDataUbah}
+                                dataKata={dataKata}
+                                setIsLoading={setIsLoading}
+                                setDataKata={setDataKata}
+                                notifySukses={notifySukses}
+                                notifyGagal={notifyGagal}
+                              />
+                            );
+                          })}
+                          {/* <tr
                           key={dataCariKata[0]?.index}
                           className="bg-gray-50 h-8"
                         >
@@ -244,9 +327,10 @@ export default function Kelolakata({ setIsMenu }: Props) {
                               Hapus
                             </div>
                           </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                        </tr> */}
+                        </tbody>
+                      </table>
+                    </div>
                   )}
                 </div>
               )}
