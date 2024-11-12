@@ -250,34 +250,39 @@ export default function Koleksi() {
                         })}
                   </div>
                 ) : (
-                  <div className="w-full h-full">
+                  <div className="w-full h-[432px]">
                     {dataCariKata?.length !== 0 ? (
-                      <div className="w-full h-full">
-                        <div className="w-full grid grid-cols-2 h-12 border-b-4 border-krem2 bg-krem1 px-6 hover:brightness-95">
+                      <div className="w-full h-[432px] flex flex-col">
+                        <div className="w-full grid grid-cols-2 h-[10%] border-b-4 border-krem2 bg-krem1 px-6 hover:brightness-95 sticky top-0">
                           <div className="col-span-1 h-full w-full flex items-center">
                             <p className="text-2xl text-coklat font-alata font-semibold">
                               {dataKataGroup[0]?.group}
                             </p>
                           </div>
                         </div>
-                        <div className="flex flex-col justify-center items-center w-full">
-                          {dataKataGroup[0]?.kataGroup?.map((item: any) => {
-                            return (
-                              <div
-                                key={item.index}
-                                className="min-h-10 h-auto max-h-16 lg:w-full w-[300px] bg-krem1 grid grid-cols-2 font-alata text-coklat font-medium text-base"
-                              >
-                                <div className="col-span-1 w-full h-full flex justify-center items-center border border-krem2 lg:px-28 px-4">
-                                  <p className="font-semibold">
-                                    {item?.indonesia}
-                                  </p>
+
+                        <div className="h-[90%] w-full ">
+                          <div className="flex flex-col justify-center items-center max-h-full overflow-y-auto">
+                            {dataKataGroup[0]?.kataGroup?.map((item: any) => {
+                              return (
+                                <div
+                                  key={item.index}
+                                  className="min-h-10 max-h-12 h-auto w-full bg-krem1 grid grid-cols-2 font-alata text-coklat font-semibold text-sm"
+                                >
+                                  <div className="col-span-1 w-full h-full flex justify-center items-center border border-krem2 bg-krem1 lg:px-28 px-2 ">
+                                    <p className="font-semibold ">
+                                      {item?.indonesia}
+                                    </p>
+                                  </div>
+                                  <div className="col-span-1 w-full h-full flex justify-center items-center border border-krem2 bg-krem1 lg:px-28 px-2 ">
+                                    <p className="font-semibold ">
+                                      {item?.sunda}
+                                    </p>
+                                  </div>
                                 </div>
-                                <div className="col-span-1 w-full h-full flex justify-center items-center border border-krem2 px-28">
-                                  <p className="font-semibold">{item?.sunda}</p>
-                                </div>
-                              </div>
-                            );
-                          })}
+                              );
+                            })}
+                          </div>
                         </div>
                       </div>
                     ) : (

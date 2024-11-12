@@ -6,6 +6,7 @@ import { BsFileEarmarkExcel } from "react-icons/bs";
 import { TiDeleteOutline } from "react-icons/ti";
 import axios from "axios";
 import { routes } from "../api/routes";
+import * as xlsx from "xlsx";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -15,31 +16,79 @@ interface Props {
 
 export default function Uploadfile({ setIsMenu }: Props) {
   const [file, setFile] = useState<File | null>(null);
+  const [dataFile, setDataFile] = useState<any>([]);
+  const fileTest = [
+    { ada: "1", idi: "2" },
+    { ada: "1", idi: "2" },
+  ];
 
   const handleFileChange = (e: any) => {
+    e.preventDefault();
     if (e.target.files) {
       setFile(e.target.files[0]);
+    }
+
+    if (e.target.files) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        const data = e.target.result;
+        const workbook = xlsx.read(data, { type: "array" });
+        const sheetName = workbook.SheetNames[0];
+        const worksheet = workbook.Sheets[sheetName];
+        const json = xlsx.utils.sheet_to_json(worksheet);
+        console.log("conert", json);
+
+        setDataFile(json);
+      };
+      reader.readAsArrayBuffer(e.target.files[0]);
     }
   };
 
   const handleDelete = () => {
     setFile(null);
+    setDataFile([]);
   };
 
   const handleSubmit = async () => {
     let formData = new FormData();
 
-    if (file != null) {
-      formData.append("file", file);
+    // if (file != null) {
+    //   formData.append("file", file);
+    //   const postData = async () => {
+    //     await axios.post(`http://localhost:3011/upload`, formData);
+    // await axios.post(`${routes}/upload`, {
+    //   method: "post",
+    //   serializer: "multipart",
+    //   data: formData, // form data
+    // });
+    //   };
+
+    //   postData();
+    // }
+
+    if (dataFile.length != 0) {
+      // formData.append("dataJson", dataFile);
+      for (let i = 0; i < dataFile?.indonesia?.length; i++) {
+        formData.append("indonesia", dataFile?.indonesia[i]);
+      }
+
+      for (let i = 0; i < dataFile?.sunda?.length; i++) {
+        formData.append("sunda", dataFile?.sunda[i]);
+      }
+
       const postData = async () => {
-        // await axios.post(`http://localhost:3011/upload`, formData);
-        await axios.post(`${routes}/upload`, formData);
+        const response = await axios.post(
+          `http://localhost:3011/upload`,
+          fileTest
+        );
+        console.log("Server response:", response.data);
       };
       postData();
     }
   };
 
-  console.log("xwx", file);
+  console.log("xwx", dataFile);
+  console.log("leng", dataFile.length);
   return (
     <div className="w-full">
       <ToastContainer
@@ -76,7 +125,7 @@ export default function Uploadfile({ setIsMenu }: Props) {
         </div>
 
         <div className="col-span-6 flex items-center ">
-          {file === null ? (
+          {dataFile.length === 0 ? (
             <input
               type="file"
               accept=".xlsx, .xls"
@@ -99,7 +148,7 @@ export default function Uploadfile({ setIsMenu }: Props) {
         </div>
 
         <div className="col-span-2 flex justify-center  ">
-          {file === null ? null : (
+          {dataFile.length === 0 ? null : (
             <button
               className="rounded-lg bg-black text-white px-7 py-2 w-fit h-fit"
               onClick={handleSubmit}

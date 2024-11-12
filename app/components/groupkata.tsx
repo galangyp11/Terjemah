@@ -50,9 +50,9 @@ export default function Groupkata({ data, isSortIndonesia }: Props) {
             return isSortIndonesia ? (
               <div
                 key={item.index}
-                className="min-h-10 h-auto max-h-16 lg:w-full w-[300px] bg-krem1 grid grid-cols-2 font-alata text-coklat font-medium text-base"
+                className="min-h-10 h-auto max-h-16 w-full  bg-krem1 grid grid-cols-2 font-alata text-coklat font-medium text-base"
               >
-                <div className="col-span-1 w-full h-full flex justify-center items-center border border-krem2  ">
+                <div className="col-span-1 w-full h-full flex justify-center items-center border border-krem2">
                   <p className="font-semibold">{item?.indonesia}</p>
                   {/* <p className="">/{sukuKataInd.map(syllabify)}/</p> */}
                 </div>
@@ -66,7 +66,7 @@ export default function Groupkata({ data, isSortIndonesia }: Props) {
                 key={item.index}
                 className="h-10 w-full bg-krem1 grid grid-cols-2 font-alata text-coklat font-medium text-base"
               >
-                <div className="col-span-1 w-full h-full flex justify-center items-center border border-krem2 ">
+                <div className="col-span-1 w-full h-full flex justify-center items-center border border-krem2">
                   <p className="font-semibold">{item?.sunda}</p>
                   {/* <p className="">/bu·at·su·ku·ka·ta/</p> */}
                 </div>
