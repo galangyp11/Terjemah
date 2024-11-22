@@ -38,7 +38,7 @@ export default function Uploadfile({ setIsMenu }: Props) {
         const worksheet = workbook.Sheets[sheetName];
         const json: any = xlsx.utils.sheet_to_json(worksheet);
 
-        console.log("conert", json);
+        // console.log("conert", json);
 
         for (let i = 0; i < json?.length; i++) {
           const kapitalIndonesia =
@@ -100,7 +100,7 @@ export default function Uploadfile({ setIsMenu }: Props) {
 
     const postData = async () => {
       const response = await axios.post(`${routes}/upload`, dataFile);
-      console.log("Server response:", response.data);
+      // console.log("Server response:", response.data);
 
       notifySukses("Data berhasil dimasukan!");
       setIsLoading(true);
@@ -114,8 +114,8 @@ export default function Uploadfile({ setIsMenu }: Props) {
     // }
   };
 
-  console.log("xwx", dataFile);
-  console.log("leng", dataFile.length);
+  // console.log("xwx", dataFile);
+  // console.log("leng", dataFile.length);
   return (
     <div className="w-full">
       <ToastContainer

@@ -50,14 +50,16 @@ export default function Groupkata({ data, isSortIndonesia }: Props) {
             return isSortIndonesia ? (
               <div
                 key={item.index}
-                className="min-h-10 h-auto max-h-16 w-full  bg-krem1 grid grid-cols-2 font-alata text-coklat font-medium text-base"
+                className="min-h-10 h-auto max-h-28 w-full bg-krem1 grid grid-cols-2 font-alata text-coklat font-medium text-base"
               >
                 <div className="col-span-1 w-full h-full flex justify-center items-center border border-krem2">
-                  <p className="font-semibold">{item?.indonesia}</p>
+                  <p className="font-semibold m-2 text-center">
+                    {item?.indonesia}
+                  </p>
                   {/* <p className="">/{sukuKataInd.map(syllabify)}/</p> */}
                 </div>
                 <div className="col-span-1 w-full h-full flex justify-center items-center border border-krem2">
-                  <p className="font-semibold">{item?.sunda}</p>
+                  <p className="font-semibold m-2 text-center">{item?.sunda}</p>
                   {/* <p className="">/bu·at·su·ku·ka·ta/</p> */}
                 </div>
               </div>
@@ -67,11 +69,11 @@ export default function Groupkata({ data, isSortIndonesia }: Props) {
                 className="h-10 w-full bg-krem1 grid grid-cols-2 font-alata text-coklat font-medium text-base"
               >
                 <div className="col-span-1 w-full h-full flex justify-center items-center border border-krem2">
-                  <p className="font-semibold">{item?.sunda}</p>
+                  <p className="font-semibold m-2">{item?.sunda}</p>
                   {/* <p className="">/bu·at·su·ku·ka·ta/</p> */}
                 </div>
                 <div className="col-span-1 w-full h-full flex justify-center items-center border border-krem2 ">
-                  <p className="font-semibold">{item?.indonesia}</p>
+                  <p className="font-semibold m-2">{item?.indonesia}</p>
                   {/* <p className="">/bu·at·su·ku·ka·ta/</p> */}
                 </div>
               </div>

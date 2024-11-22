@@ -119,14 +119,18 @@ export default function Koleksi() {
 
   return (
     <div className="w-full h-[700px] lg:container">
-      <div className="flex justify-center items-center gap-4 mb-6">
-        <p className="font-alata font-semibold text-5xl text-coklat">Koleksi</p>
+      <div className="flex justify-center items-center lg:gap-4 gap-2 mb-6 mt-2">
+        <p className="font-alata font-semibold lg:text-5xl text-4xl text-coklat">
+          Koleksi
+        </p>
         <div className="w-fit h-fit py-2 px-4 rounded-lg flex justify-center items-center bg-[#F6995C]">
-          <p className="text-krem1 font-alata font-semibold text-4xl">
+          <p className="text-krem1 font-alata font-semibold lg:text-4xl text-3xl">
             {dataKata?.length}
           </p>
         </div>
-        <p className="font-alata font-semibold text-5xl text-coklat">Kata</p>
+        <p className="font-alata font-semibold lg:text-5xl text-4xl text-coklat">
+          Kata
+        </p>
       </div>
 
       <div className="w-full flex justify-center mb-8">
@@ -262,20 +266,20 @@ export default function Koleksi() {
                         </div>
 
                         <div className="h-[90%] w-full ">
-                          <div className="flex flex-col justify-center items-center max-h-full overflow-y-auto">
+                          <div className="w-full max-h-full overflow-x-hidden overflow-y-auto">
                             {dataKataGroup[0]?.kataGroup?.map((item: any) => {
                               return (
                                 <div
                                   key={item.index}
-                                  className="min-h-10 max-h-12 h-auto w-full bg-krem1 grid grid-cols-2 font-alata text-coklat font-semibold text-sm"
+                                  className="min-h-10 h-auto max-h-28 w-full bg-krem1 grid grid-cols-2 font-alata text-coklat font-semibold text-base"
                                 >
-                                  <div className="col-span-1 w-full h-full flex justify-center items-center border border-krem2 bg-krem1 lg:px-28 px-2 ">
-                                    <p className="font-semibold ">
+                                  <div className="col-span-1 w-full h-full flex justify-center items-center border border-krem2">
+                                    <p className="font-semibold m-2 text-center">
                                       {item?.indonesia}
                                     </p>
                                   </div>
-                                  <div className="col-span-1 w-full h-full flex justify-center items-center border border-krem2 bg-krem1 lg:px-28 px-2 ">
-                                    <p className="font-semibold ">
+                                  <div className="col-span-1 w-full h-full flex justify-center items-center border border-krem2">
+                                    <p className="font-semibold m-2 text-center">
                                       {item?.sunda}
                                     </p>
                                   </div>
