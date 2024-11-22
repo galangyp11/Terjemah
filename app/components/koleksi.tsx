@@ -13,13 +13,14 @@ export default function Koleksi() {
   const [dataKataGroup, setDataKataGroup] = useState<any[]>([]);
   const [cariKata, setCariKata] = useState("");
   const [dataCariKata, setDataCariKata] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [isSortIndonesia, setIsSortIndonesia] = useState(true);
 
   useEffect(() => {
     const getKata = async () => {
       const response = await axios.get(`${routes}/kata`);
-
+      // console.log("wdadaw", response);
+      response?.status === 200 ? setIsLoading(false) : setIsLoading(true);
       if (isSortIndonesia === true) {
         const sortIndo = response.data.sort((a: any, b: any) => {
           if (a.indonesia > b.indonesia) {
@@ -86,7 +87,7 @@ export default function Koleksi() {
     const onSearchItem = async () => {
       const response = await axios.get(`${routes}/kata/${cariKata}`);
       setDataCariKata(response.data);
-      // console.log("wdadaw", response.data);
+
       const groupAbjad = response.data.reduce((i: any, e: any) => {
         let group = e.indonesia[0];
         if (!i[group]) i[group] = { group, kataGroup: [e] };
@@ -209,9 +210,20 @@ export default function Koleksi() {
               <div className="w-full h-full flex justify-center items-center -mt-12">
                 {cariKata === "" && dataKata.length === 0 ? (
                   <div className="w-full flex justify-center items-center gap-4">
-                    <p className="text-coklat text-xl font-alata font-medium">
-                      Data Kata Kosong
-                    </p>
+                    {isLoading === true ? (
+                      <div className="flex justify-center items-center h-full w-full gap-2">
+                        <p className="text-coklat text-xl font-alata font-medium">
+                          Memuat Kata
+                        </p>
+                        <SyncLoader size={10} color="#674636" />
+                      </div>
+                    ) : (
+                      <div className="flex justify-center items-center h-full w-full">
+                        <p className="text-coklat text-xl font-alata font-medium">
+                          Data kata Kosong
+                        </p>
+                      </div>
+                    )}
                   </div>
                 ) : isLoading ? (
                   <div className="w-full flex justify-center items-center gap-4">
